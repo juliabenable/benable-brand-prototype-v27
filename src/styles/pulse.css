@@ -290,6 +290,13 @@
   margin: 16px 0 14px;
 }
 
+/* ---- E · Rail wide: same idea, roomier column ---- */
+.cp-rail-host--wide { grid-template-columns: minmax(0, 1fr) 404px; }
+
+.cp-rail--wide { padding: 22px 24px 24px; }
+.cp-rail--wide .cp-lead { margin-bottom: 6px; }
+.cp-rail--wide .cp-lead-headline { font-size: 18px; }
+
 @media (max-width: 1000px) {
   .cp-rail-host { display: block; }
   .cp-rail { margin-bottom: 20px; }

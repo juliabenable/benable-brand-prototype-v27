@@ -97,6 +97,7 @@ const VARIANTS = [
   { key: 'B', name: 'Banner' },
   { key: 'C', name: 'Rail' },
   { key: 'D', name: 'Open' },
+  { key: 'E', name: 'Rail wide' },
 ];
 
 // Survive remounts (the captured-HTML subtree can wipe and re-mount the block).
@@ -165,12 +166,13 @@ export default function CampaignPulse() {
     const wrap = rootRef.current?.parentElement;
     const column = wrap?.classList.contains('cp-host') ? wrap.parentElement : wrap;
     if (!wrap || !column) return;
-    const on = variant === 'C';
+    const on = variant === 'C' || variant === 'E';
     wrap.classList.toggle('cp-rail-child', on);
     column.classList.toggle('cp-rail-host', on);
+    column.classList.toggle('cp-rail-host--wide', variant === 'E');
     return () => {
       wrap.classList.remove('cp-rail-child');
-      column.classList.remove('cp-rail-host');
+      column.classList.remove('cp-rail-host', 'cp-rail-host--wide');
     };
   }, [variant]);
 
@@ -222,11 +224,11 @@ export default function CampaignPulse() {
         </div>
       )}
 
-      {variant === 'C' && (
-        <aside className="cp-rail" key={`c-${scene.day}`}>
-          <Lead scene={scene} small />
+      {(variant === 'C' || variant === 'E') && (
+        <aside className={variant === 'E' ? 'cp-rail cp-rail--wide' : 'cp-rail'} key={`${variant}-${scene.day}`}>
+          <Lead scene={scene} small={variant === 'C'} />
           <div className="cp-overline" style={{ marginTop: 14 }}>Today at Benable</div>
-          <Feed scene={scene} compact />
+          <Feed scene={scene} compact={variant === 'C'} />
           <div className="cp-rail-divider" />
           <div className="cp-overline">The pace</div>
           <PaceBars scene={scene} />
