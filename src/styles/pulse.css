@@ -181,6 +181,123 @@
 
 .cp-race-caption strong { color: #1a1a1a; }
 
+/* ---- small lead (rail variant) ---- */
+.cp-lead--small { margin-bottom: 4px; }
+.cp-lead--small .cp-lead-headline { font-size: 16px; }
+.cp-lead--small .cp-lead-updated { font-size: 11.5px; }
+
+/* ---- compact feed (banner + rail) ---- */
+.cp-feed--compact .cp-feed-item { padding-bottom: 10px; }
+.cp-feed--compact .cp-feed-icon { width: 26px; height: 26px; border-radius: 8px; font-size: 12px; }
+.cp-feed--compact .cp-feed-item:not(:last-child)::before { left: 12px; top: 30px; }
+.cp-feed--compact .cp-feed-text { font-size: 13px; }
+
+/* ---- B · Banner: one warm tinted digest container ---- */
+.cp-banner {
+  background: linear-gradient(180deg, #faf7f1 0%, #fbf9f5 100%);
+  border: 1px solid #f0e7d8;
+  border-radius: 12px;
+  padding: 20px 24px 22px;
+  animation: cp-in 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.cp-banner-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+.cp-banner-top .cp-lead { margin-bottom: 0; }
+
+.cp-banner-cols {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr;
+  gap: 28px;
+}
+
+@media (max-width: 860px) {
+  .cp-banner-cols { grid-template-columns: 1fr; }
+}
+
+.cp-banner .cp-feed-icon { background: #ffffff; box-shadow: inset 0 0 0 1px #f0e7d8; }
+.cp-banner .cp-feed-item--win .cp-feed-icon { background: #e9f6ee; box-shadow: none; }
+.cp-banner .cp-feed-item:not(:last-child)::before { background: #eee3cf; }
+.cp-banner .cp-track { background: #efe9dd; }
+.cp-banner .cp-overline { color: #a08544; }
+
+/* ---- pace chip (banner + open) ---- */
+.cp-chip-pace {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: #5e41d6;
+  background: #ebe4ff;
+  border-radius: 999px;
+  padding: 6px 13px;
+  white-space: nowrap;
+}
+
+.cp-chip-day {
+  display: inline-flex;
+  align-items: center;
+  font-size: 12.5px;
+  font-weight: 500;
+  color: #717171;
+  background: #f1f1f1;
+  border-radius: 999px;
+  padding: 6px 13px;
+  white-space: nowrap;
+}
+
+.cp-chip-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin: -8px 0 4px;
+}
+
+/* ---- C · Rail: host column becomes content | rail ---- */
+.cp-rail-host {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) 324px;
+  grid-auto-flow: dense;
+  column-gap: 24px;
+  align-items: start;
+}
+
+.cp-rail-host > * { grid-column: 1; min-width: 0; }
+.cp-rail-host > .cp-rail-child { grid-column: 2; grid-row: 1 / span 30; margin: 4px 0 0; }
+
+.cp-rail {
+  background: #fafafa;
+  border-radius: 12px;
+  padding: 18px 18px 20px;
+}
+
+.cp-rail .cp-feed-icon { background: #ffffff; box-shadow: inset 0 0 0 1px #ececec; }
+.cp-rail .cp-feed-item--win .cp-feed-icon { background: #e9f6ee; box-shadow: none; }
+.cp-rail .cp-feed-item:not(:last-child)::before { background: #e9e9e9; }
+.cp-rail .cp-track { background: #ececec; }
+
+.cp-rail-divider {
+  height: 1px;
+  background: #e9e9e9;
+  margin: 16px 0 14px;
+}
+
+@media (max-width: 1000px) {
+  .cp-rail-host { display: block; }
+  .cp-rail { margin-bottom: 20px; }
+}
+
+/* ---- D · Open: borderless timeline on the page bg ---- */
+.cp-root--d .cp-feed { max-width: 640px; }
+
 /* ---- demo scrubber (presenter control) ---- */
 .cp-scrubber {
   position: fixed;
@@ -243,4 +360,11 @@
   background: #7a5cfa;
   color: #fff;
   box-shadow: 0 4px 12px #7a5cfa73;
+}
+
+.cp-scrub-sep {
+  width: 1px;
+  height: 18px;
+  background: #ffffff2e;
+  margin: 0 4px;
 }
