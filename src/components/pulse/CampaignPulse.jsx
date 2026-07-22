@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
 import '../../styles/pulse.css';
 
 /*
@@ -95,16 +96,14 @@ const DAYS = [
 const VARIANTS = [
   { key: 'A', name: 'Panel' },
   { key: 'B', name: 'Banner' },
-  { key: 'C', name: 'Rail' },
-  { key: 'D', name: 'Open' },
+  { key: 'D', name: 'Pulse tab' },
   { key: 'E', name: 'Rail wide' },
   { key: 'F', name: 'Rail left' },
-  { key: 'G', name: 'Status head' },
   { key: 'H', name: 'Status band' },
 ];
 
-const RAIL_VARIANTS = ['C', 'E', 'F'];
-const RAIL_HOST_VARIANTS = ['C', 'E', 'F', 'G', 'H'];
+const RAIL_VARIANTS = ['E', 'F'];
+const RAIL_HOST_VARIANTS = ['E', 'F', 'H'];
 
 // Survive remounts (the captured-HTML subtree can wipe and re-mount the block).
 let persistedIdx = 2; // open on Day 9 — the "dead middle" is the thesis
@@ -170,14 +169,46 @@ function Lead({ scene, small }) {
   );
 }
 
+// D: whether the injected "Pulse" tab is the open tab
+let persistedPulseTab = true;
+
 export default function CampaignPulse() {
   const [idx, setIdx] = useState(persistedIdx);
-  const [variant, setVariant] = useState(persistedVariant);
+  const [variant, setVariant] = useState(
+    VARIANTS.some((v) => v.key === persistedVariant) ? persistedVariant : 'D',
+  );
+  const [pulseOpen, setPulseOpen] = useState(persistedPulseTab);
+  const [tabBarEl, setTabBarEl] = useState(null);
   const rootRef = useRef(null);
   const scene = DAYS[idx];
 
   useEffect(() => { persistedIdx = idx; }, [idx]);
   useEffect(() => { persistedVariant = variant; }, [variant]);
+  useEffect(() => { persistedPulseTab = pulseOpen; }, [pulseOpen]);
+
+  // D: inject a "Pulse" tab into the captured tab bar; captured tabs close it
+  useEffect(() => {
+    if (variant !== 'D') { setTabBarEl(null); return; }
+    setPulseOpen(true);
+    const wrap = rootRef.current?.parentElement;
+    const column = wrap?.classList.contains('cp-host') ? wrap.parentElement : wrap;
+    const bar = column?.querySelector('.workflow-dashboard-tab')?.parentElement || null;
+    setTabBarEl(bar);
+    const close = (e) => {
+      if (e.target.closest('.workflow-dashboard-tab') && !e.target.closest('.cp-ptab')) setPulseOpen(false);
+    };
+    bar?.addEventListener('click', close);
+    return () => bar?.removeEventListener('click', close);
+  }, [variant]);
+
+  // D: while the Pulse tab is open, hide the Dashboard tab's own content
+  useEffect(() => {
+    const wrap = rootRef.current?.parentElement;
+    const column = wrap?.classList.contains('cp-host') ? wrap.parentElement : wrap;
+    if (!column) return;
+    column.classList.toggle('cp-tab-mode', variant === 'D' && pulseOpen);
+    return () => column.classList.remove('cp-tab-mode');
+  }, [variant, pulseOpen]);
 
   // Variant C turns the page's main column into a two-column grid (content | rail).
   // The pulse mounts inside a dedicated .cp-host wrapper, so the grid goes on
@@ -189,13 +220,12 @@ export default function CampaignPulse() {
     const on = RAIL_HOST_VARIANTS.includes(variant);
     wrap.classList.toggle('cp-rail-child', on);
     column.classList.toggle('cp-rail-host', on);
-    column.classList.toggle('cp-rail-host--wide', on && variant !== 'C');
-    column.classList.toggle('cp-rail-host--left', variant === 'F' || variant === 'G' || variant === 'H');
-    column.classList.toggle('cp-rail-host--g', variant === 'G');
+    column.classList.toggle('cp-rail-host--wide', on);
+    column.classList.toggle('cp-rail-host--left', variant === 'F' || variant === 'H');
     column.classList.toggle('cp-rail-host--h', variant === 'H');
     return () => {
       wrap.classList.remove('cp-rail-child');
-      column.classList.remove('cp-rail-host', 'cp-rail-host--wide', 'cp-rail-host--left', 'cp-rail-host--g', 'cp-rail-host--h');
+      column.classList.remove('cp-rail-host', 'cp-rail-host--wide', 'cp-rail-host--left', 'cp-rail-host--h');
     };
   }, [variant]);
 
@@ -248,18 +278,30 @@ export default function CampaignPulse() {
       )}
 
       {RAIL_VARIANTS.includes(variant) && (
-        <aside className={variant === 'C' ? 'cp-rail' : 'cp-rail cp-rail--wide'} key={`${variant}-${scene.day}`}>
-          <Lead scene={scene} small={variant === 'C'} />
+        <aside className="cp-rail cp-rail--wide" key={`${variant}-${scene.day}`}>
+          <Lead scene={scene} />
           <div className="cp-overline" style={{ marginTop: 14 }}>Today at Benable</div>
-          <Feed scene={scene} compact={variant === 'C'} />
+          <Feed scene={scene} />
           <div className="cp-rail-divider" />
           <div className="cp-overline">The pace</div>
           <PaceBars scene={scene} />
         </aside>
       )}
 
-      {variant === 'D' && (
-        <div key={`d-${scene.day}`}>
+      {/* D: its own "Pulse" tab in the real tab bar */}
+      {variant === 'D' && tabBarEl && createPortal(
+        <button
+          type="button"
+          className={`workflow-dashboard-tab cp-ptab ${pulseOpen ? 'active' : ''}`}
+          onClick={() => setPulseOpen(true)}
+        >
+          Pulse<span className="cp-ptab-dot" />
+        </button>,
+        tabBarEl,
+      )}
+
+      {variant === 'D' && pulseOpen && (
+        <div key={`d-${scene.day}`} className="cp-dtab">
           <Lead scene={scene} />
           <div className="cp-chip-row">
             <span className="cp-chip-pace">{scene.race.chip}</span>
@@ -268,20 +310,6 @@ export default function CampaignPulse() {
           <div className="cp-overline" style={{ margin: '20px 0 10px' }}>Today at Benable</div>
           <Feed scene={scene} />
         </div>
-      )}
-
-      {/* G: the status sentence IS the left section's heading */}
-      {variant === 'G' && (
-        <>
-          <div className="cp-section-head cp-g-head" key={`g-head-${scene.day}`}>
-            <h3 className="cp-g-headline">{scene.headline}</h3>
-            <p className="cp-section-sub">{scene.updated} · live from the Benable team</p>
-          </div>
-          <section className="cp-sec-card" key={`g-card-${scene.day}`}>
-            <Feed scene={scene} />
-            <PaceFooter scene={scene} />
-          </section>
-        </>
       )}
 
       {/* H: quiet full-width status band, then two matched sections */}
