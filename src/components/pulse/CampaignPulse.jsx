@@ -99,9 +99,12 @@ const VARIANTS = [
   { key: 'D', name: 'Open' },
   { key: 'E', name: 'Rail wide' },
   { key: 'F', name: 'Rail left' },
+  { key: 'G', name: 'Status head' },
+  { key: 'H', name: 'Status band' },
 ];
 
 const RAIL_VARIANTS = ['C', 'E', 'F'];
+const RAIL_HOST_VARIANTS = ['C', 'E', 'F', 'G', 'H'];
 
 // Survive remounts (the captured-HTML subtree can wipe and re-mount the block).
 let persistedIdx = 2; // open on Day 9 — the "dead middle" is the thesis
@@ -144,6 +147,20 @@ function PaceBars({ scene }) {
   );
 }
 
+function PaceFooter({ scene }) {
+  return (
+    <div className="cp-sec-footer">
+      <div className="cp-sec-footer-row">
+        <span className="cp-sec-pace-text">{scene.race.chip}</span>
+        <span className="cp-sec-pace-day">day {scene.day} of 30</span>
+      </div>
+      <div className="cp-track cp-track--mini">
+        <div className="cp-fill cp-fill--you" style={{ width: `${scene.race.you}%` }} />
+      </div>
+    </div>
+  );
+}
+
 function Lead({ scene, small }) {
   return (
     <div className={small ? 'cp-lead cp-lead--small' : 'cp-lead'}>
@@ -169,14 +186,16 @@ export default function CampaignPulse() {
     const wrap = rootRef.current?.parentElement;
     const column = wrap?.classList.contains('cp-host') ? wrap.parentElement : wrap;
     if (!wrap || !column) return;
-    const on = RAIL_VARIANTS.includes(variant);
+    const on = RAIL_HOST_VARIANTS.includes(variant);
     wrap.classList.toggle('cp-rail-child', on);
     column.classList.toggle('cp-rail-host', on);
-    column.classList.toggle('cp-rail-host--wide', variant === 'E' || variant === 'F');
-    column.classList.toggle('cp-rail-host--left', variant === 'F');
+    column.classList.toggle('cp-rail-host--wide', on && variant !== 'C');
+    column.classList.toggle('cp-rail-host--left', variant === 'F' || variant === 'G' || variant === 'H');
+    column.classList.toggle('cp-rail-host--g', variant === 'G');
+    column.classList.toggle('cp-rail-host--h', variant === 'H');
     return () => {
       wrap.classList.remove('cp-rail-child');
-      column.classList.remove('cp-rail-host', 'cp-rail-host--wide', 'cp-rail-host--left');
+      column.classList.remove('cp-rail-host', 'cp-rail-host--wide', 'cp-rail-host--left', 'cp-rail-host--g', 'cp-rail-host--h');
     };
   }, [variant]);
 
@@ -249,6 +268,46 @@ export default function CampaignPulse() {
           <div className="cp-overline" style={{ margin: '20px 0 10px' }}>Today at Benable</div>
           <Feed scene={scene} />
         </div>
+      )}
+
+      {/* G: the status sentence IS the left section's heading */}
+      {variant === 'G' && (
+        <>
+          <div className="cp-section-head cp-g-head" key={`g-head-${scene.day}`}>
+            <h3 className="cp-g-headline">{scene.headline}</h3>
+            <p className="cp-section-sub">{scene.updated} · live from the Benable team</p>
+          </div>
+          <section className="cp-sec-card" key={`g-card-${scene.day}`}>
+            <Feed scene={scene} />
+            <PaceFooter scene={scene} />
+          </section>
+        </>
+      )}
+
+      {/* H: quiet full-width status band, then two matched sections */}
+      {variant === 'H' && (
+        <>
+          <div className="cp-band" key={`h-band-${scene.day}`}>
+            <div>
+              <h2 className="cp-band-headline">{scene.headline}</h2>
+              <span className="cp-band-updated">{scene.updated}</span>
+            </div>
+            <div className="cp-band-pace">
+              <span className="cp-chip-pace">{scene.race.chip}</span>
+              <div className="cp-band-track">
+                <div className="cp-fill cp-fill--you" style={{ width: `${scene.race.you}%` }} />
+              </div>
+              <span className="cp-band-day">day {scene.day} of 30</span>
+            </div>
+          </div>
+          <div className="cp-section-head cp-h-head" key="h-head">
+            <h3 className="cp-section-title">Today at Benable</h3>
+            <p className="cp-section-sub">Everything we're doing on your campaign — updated live</p>
+          </div>
+          <section className="cp-sec-card" key={`h-card-${scene.day}`}>
+            <Feed scene={scene} />
+          </section>
+        </>
       )}
 
       {/* demo scrubber — presenter control, not product UI */}
