@@ -25,6 +25,11 @@ const DAYS = [
       { time: '9:04 am', emoji: '🤖', tone: 'busy', text: 'Scanned 214 creator profiles against your brief.' },
     ],
     race: { you: 8, them: 2, caption: 'Day 1 — most brands are still writing the brief. Yours is already in the field.', chip: '🚀 Ahead before day one is over' },
+    forYou: [],
+    upNext: [
+      { emoji: '✨', text: 'Your creator shortlist lands for review', eta: 'in ~2 days' },
+      { emoji: '💌', text: 'Invites go out the moment you approve', eta: 'right after your review' },
+    ],
   },
   {
     day: 3,
@@ -38,6 +43,13 @@ const DAYS = [
       { time: '9:12 am', emoji: '☕️', tone: 'busy', text: 'Katie did a final pass over the shortlist with fresh eyes.' },
     ],
     race: { you: 18, them: 5, caption: 'Day 3 and your shortlist is ready. <strong>Industry average: day 12.</strong>', chip: '🚀 Shortlist 9 days ahead of average' },
+    forYou: [
+      { emoji: '🎉', text: '6 creators are waiting for your review', cta: 'Review creators' },
+    ],
+    upNext: [
+      { emoji: '💌', text: 'Invites out within hours of your approvals', eta: 'same day' },
+      { emoji: '📦', text: 'Product picks + shipping as creators accept', eta: 'this week' },
+    ],
   },
   {
     day: 9,
@@ -51,6 +63,12 @@ const DAYS = [
       { time: '9:15 am', emoji: '👋', tone: 'busy', text: 'Nudged 2 creators to confirm their delivery windows.' },
     ],
     race: { you: 34, them: 12, caption: 'Day 9 — a typical agency would <strong>still be negotiating contracts</strong>. Your products are already in the mail.', chip: '🚀 2.8× faster than a typical campaign' },
+    forYou: [],
+    upNext: [
+      { emoji: '📦', text: 'All packages delivered', eta: 'by Thursday' },
+      { emoji: '🔁', text: 'Replacement picks for Lena', eta: 'within 48h — we’ll ping you' },
+      { emoji: '🎬', text: 'First creators start filming', eta: 'this weekend' },
+    ],
   },
   {
     day: 16,
@@ -64,6 +82,13 @@ const DAYS = [
       { time: '10:15 am', emoji: '🤳', tone: 'busy', text: 'Nia posted a behind-the-scenes teaser to her stories.' },
     ],
     race: { you: 58, them: 24, caption: 'First content on day 16. <strong>Industry average: day 41.</strong>', chip: '🚀 First content 25 days early' },
+    forYou: [
+      { emoji: '🎬', text: '2 new videos are ready for a look', cta: 'Watch the first cuts' },
+    ],
+    upNext: [
+      { emoji: '📣', text: 'First posts go live once you approve', eta: '~2 days after approval' },
+      { emoji: '🎥', text: '3 more creators film this week', eta: 'submissions by Sunday' },
+    ],
   },
   {
     day: 22,
@@ -77,6 +102,13 @@ const DAYS = [
       { time: '9:45 am', emoji: '🛰', tone: 'busy', text: 'We’re watching tags on IG & TikTok so nothing slips by.' },
     ],
     race: { you: 80, them: 31, caption: 'Day 22 — you’re moving about <strong>2.6× faster</strong> than a typical campaign.', chip: '🚀 2.6× faster than a typical campaign' },
+    forYou: [
+      { emoji: '💬', text: 'Nia’s reel is taking off — a brand comment goes a long way', cta: 'Open the post' },
+    ],
+    upNext: [
+      { emoji: '⏰', text: 'Maya’s post goes live', eta: 'Thursday' },
+      { emoji: '🏁', text: 'Campaign wrap + your content library', eta: 'in 8 days' },
+    ],
   },
   {
     day: 30,
@@ -90,6 +122,13 @@ const DAYS = [
       { time: '9:30 am', emoji: '📦', tone: 'busy', text: 'All content files collected and added to your library.' },
     ],
     race: { you: 100, them: 45, caption: 'Wrapped in 30 days. <strong>Industry average: 67 days.</strong>', chip: '🚀 Wrapped 37 days early' },
+    forYou: [
+      { emoji: '🥂', text: 'Your campaign wrap-up is ready', cta: 'See the wrap-up' },
+      { emoji: '🔁', text: 'Loved someone? Book them for round two', cta: 'Rehire favorites' },
+    ],
+    upNext: [
+      { emoji: '🚀', text: 'Campaign #2 — same crew or fresh faces', eta: 'whenever you’re ready' },
+    ],
   },
 ];
 
@@ -307,8 +346,48 @@ export default function CampaignPulse() {
             <span className="cp-chip-pace">{scene.race.chip}</span>
             <span className="cp-chip-day">Day {scene.day} of 30</span>
           </div>
-          <div className="cp-overline" style={{ margin: '20px 0 10px' }}>Today at Benable</div>
-          <Feed scene={scene} />
+
+          {/* for you: warm invitations, never nags; green all-clear otherwise */}
+          {scene.forYou.length > 0 ? (
+            <div className="cp-foryou">
+              <div className="cp-overline" style={{ margin: '22px 0 8px' }}>For you</div>
+              <div className="cp-foryou-row">
+                {scene.forYou.map((a) => (
+                  <div className="cp-action-card" key={a.text}>
+                    <span className="cp-action-emoji">{a.emoji}</span>
+                    <span className="cp-action-text">{a.text}</span>
+                    {a.cta && <button type="button" className="cp-action-cta">{a.cta}</button>}
+                  </div>
+                ))}
+              </div>
+            </div>
+          ) : (
+            <div className="cp-nothing">✅ Nothing needed from you today — we’re on it.</div>
+          )}
+
+          <div className="cp-dtab-grid">
+            <div>
+              <div className="cp-overline" style={{ margin: '0 0 14px' }}>The story so far</div>
+              {[...DAYS.slice(0, idx + 1)].reverse().map((d, i) => (
+                <div key={d.day} className={i === 0 ? 'cp-journal-day' : 'cp-journal-day cp-journal-day--past'}>
+                  <div className="cp-journal-label"><span>{i === 0 ? `Today · Day ${d.day}` : `Day ${d.day}`}</span></div>
+                  <Feed scene={d} compact={i !== 0} />
+                </div>
+              ))}
+            </div>
+            <aside>
+              <div className="cp-overline" style={{ margin: '0 0 14px' }}>Up next</div>
+              {scene.upNext.map((u) => (
+                <div className="cp-upnext-item" key={u.text}>
+                  <span className="cp-upnext-emoji">{u.emoji}</span>
+                  <div>
+                    <div className="cp-upnext-text">{u.text}</div>
+                    {u.eta && <div className="cp-upnext-eta">{u.eta}</div>}
+                  </div>
+                </div>
+              ))}
+            </aside>
+          </div>
         </div>
       )}
 
