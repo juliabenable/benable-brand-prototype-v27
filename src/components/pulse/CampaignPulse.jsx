@@ -399,12 +399,19 @@ export default function CampaignPulse() {
               <h2 className="cp-band-headline">{scene.headline}</h2>
               <span className="cp-band-updated">{scene.updated}</span>
             </div>
-            <div className="cp-band-pace">
-              <span className="cp-chip-pace">{scene.race.chip}</span>
-              <div className="cp-band-track">
-                <div className="cp-fill cp-fill--you" style={{ width: `${scene.race.you}%` }} />
+            <div className="cp-band-right">
+              {scene.forYou.map((a) => (
+                <button type="button" className="cp-band-action" key={a.text} title={a.text}>
+                  {a.emoji} {a.cta} →
+                </button>
+              ))}
+              <div className="cp-band-pace">
+                <span className="cp-chip-pace">{scene.race.chip}</span>
+                <div className="cp-band-track">
+                  <div className="cp-fill cp-fill--you" style={{ width: `${scene.race.you}%` }} />
+                </div>
+                <span className="cp-band-day">day {scene.day} of 30</span>
               </div>
-              <span className="cp-band-day">day {scene.day} of 30</span>
             </div>
           </div>
           <div className="cp-section-head cp-h-head" key="h-head">
@@ -412,7 +419,24 @@ export default function CampaignPulse() {
             <p className="cp-section-sub">Everything we're doing on your campaign — updated live</p>
           </div>
           <section className="cp-sec-card" key={`h-card-${scene.day}`}>
-            <Feed scene={scene} />
+            {[...DAYS.slice(0, idx + 1)].reverse().map((d, i) => (
+              <div key={d.day} className={i === 0 ? 'cp-journal-day' : 'cp-journal-day cp-journal-day--past'}>
+                {i > 0 && <div className="cp-journal-label"><span>{`Day ${d.day}`}</span></div>}
+                <Feed scene={d} compact={i !== 0} />
+              </div>
+            ))}
+            <div className="cp-h-upnext">
+              <div className="cp-overline" style={{ margin: '16px 0 10px' }}>Up next</div>
+              {scene.upNext.map((u) => (
+                <div className="cp-upnext-item" key={u.text}>
+                  <span className="cp-upnext-emoji">{u.emoji}</span>
+                  <div>
+                    <div className="cp-upnext-text">{u.text}</div>
+                    {u.eta && <div className="cp-upnext-eta">{u.eta}</div>}
+                  </div>
+                </div>
+              ))}
+            </div>
           </section>
         </>
       )}
