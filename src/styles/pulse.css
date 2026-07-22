@@ -777,3 +777,40 @@
   color: #9a9a9a;
   margin: 10px 2px 0;
 }
+
+/* ============================================================
+   L / M / N — the recap-anatomy tiles in three placements
+   ============================================================ */
+
+.cp-tiles {
+  display: grid;
+  grid-template-columns: 1.25fr 1fr 1fr;
+  gap: 16px;
+  align-items: stretch;
+  margin-top: 4px;
+}
+
+@media (max-width: 1000px) {
+  .cp-tiles { grid-template-columns: 1fr; }
+}
+
+.cp-tiles .cp-recap-card,
+.cp-tile-stack .cp-recap-card {
+  max-width: none;
+  display: flex;
+  flex-direction: column;
+}
+
+.cp-tiles .cp-recap-body,
+.cp-tile-stack .cp-recap-body { flex: 1; }
+
+.cp-tile-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.cp-tile-eta { color: #9a9a9a; font-weight: 400; }
+
+/* pace bars sit flush inside a tile body */
+.cp-recap-body .cp-race-meta:first-child { margin-top: 2px; }

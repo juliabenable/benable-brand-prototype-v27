@@ -210,10 +210,13 @@ const VARIANTS = [
   { key: 'I', name: 'Katie band' },
   { key: 'J', name: 'Katie note' },
   { key: 'K', name: 'While away' },
+  { key: 'L', name: 'Tile row' },
+  { key: 'M', name: 'Tiles right' },
+  { key: 'N', name: 'Tiles left' },
 ];
 
 const RAIL_VARIANTS = ['E', 'F'];
-const RAIL_HOST_VARIANTS = ['E', 'F', 'H', 'I', 'J'];
+const RAIL_HOST_VARIANTS = ['E', 'F', 'H', 'I', 'J', 'M', 'N'];
 const BAND_VARIANTS = ['H', 'I', 'J'];
 
 // Survive remounts (the captured-HTML subtree can wipe and re-mount the block).
@@ -267,6 +270,69 @@ function PaceFooter({ scene }) {
       </div>
       <div className="cp-track cp-track--mini">
         <div className="cp-fill cp-fill--you" style={{ width: `${scene.race.you}%` }} />
+      </div>
+    </div>
+  );
+}
+
+/* --- harmonized tiles: identical head/body/footer anatomy --- */
+function RecapTile({ scene }) {
+  return (
+    <div className="cp-recap-card">
+      <div className="cp-recap-head">
+        <span className="cp-recap-title">👋 While you were away</span>
+        <span className="cp-recap-since">{scene.recap.since}</span>
+      </div>
+      <div className="cp-recap-body">
+        {scene.recap.items.map((it, i) => (
+          <div className="cp-recap-item" key={it.bold} style={{ animationDelay: `${0.07 * i}s` }}>
+            <span className="cp-recap-emoji">{it.emoji}</span>
+            <span className="cp-recap-text"><strong>{it.bold}</strong>{it.rest}</span>
+          </div>
+        ))}
+      </div>
+      {scene.recap.closer.clear ? (
+        <div className="cp-recap-closer cp-recap-closer--clear">✅ {scene.recap.closer.text}</div>
+      ) : (
+        <div className="cp-recap-closer">
+          <span>{scene.recap.closer.text}</span>
+          <button type="button" className="cp-action-cta">{scene.recap.closer.cta}</button>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function PaceTile({ scene }) {
+  return (
+    <div className="cp-recap-card">
+      <div className="cp-recap-head">
+        <span className="cp-recap-title">🏁 The pace</span>
+        <span className="cp-recap-since">day {scene.day} of 30</span>
+      </div>
+      <div className="cp-recap-body">
+        <PaceBars scene={scene} />
+      </div>
+    </div>
+  );
+}
+
+function UpNextTile({ scene }) {
+  return (
+    <div className="cp-recap-card">
+      <div className="cp-recap-head">
+        <span className="cp-recap-title">⏭️ Up next</span>
+      </div>
+      <div className="cp-recap-body">
+        {scene.upNext.map((u, i) => (
+          <div className="cp-recap-item" key={u.text} style={{ animationDelay: `${0.07 * i}s` }}>
+            <span className="cp-recap-emoji">{u.emoji}</span>
+            <span className="cp-recap-text">
+              <strong>{u.text}</strong>
+              {u.eta && <span className="cp-tile-eta"> — {u.eta}</span>}
+            </span>
+          </div>
+        ))}
       </div>
     </div>
   );
@@ -340,7 +406,7 @@ export default function CampaignPulse() {
     wrap.classList.toggle('cp-rail-child', on);
     column.classList.toggle('cp-rail-host', on);
     column.classList.toggle('cp-rail-host--wide', on);
-    column.classList.toggle('cp-rail-host--left', variant === 'F' || BAND_VARIANTS.includes(variant));
+    column.classList.toggle('cp-rail-host--left', variant === 'F' || variant === 'N' || BAND_VARIANTS.includes(variant));
     column.classList.toggle('cp-rail-host--h', BAND_VARIANTS.includes(variant));
     return () => {
       wrap.classList.remove('cp-rail-child');
@@ -572,6 +638,23 @@ export default function CampaignPulse() {
             )}
           </div>
           <div className="cp-recap-note">The same recap lands as your Monday digest email 📧</div>
+        </div>
+      )}
+
+      {/* L/M/N: the same three harmonized tiles, three placements */}
+      {variant === 'L' && (
+        <div className="cp-tiles" key={`l-${scene.day}`}>
+          <RecapTile scene={scene} />
+          <PaceTile scene={scene} />
+          <UpNextTile scene={scene} />
+        </div>
+      )}
+
+      {(variant === 'M' || variant === 'N') && (
+        <div className="cp-tile-stack" key={`${variant}-${scene.day}`}>
+          <RecapTile scene={scene} />
+          <PaceTile scene={scene} />
+          <UpNextTile scene={scene} />
         </div>
       )}
 
