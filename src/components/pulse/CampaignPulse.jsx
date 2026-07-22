@@ -32,6 +32,15 @@ const DAYS = [
       { emoji: '✨', text: 'Your creator shortlist lands for review', eta: 'in ~2 days' },
       { emoji: '💌', text: 'Invites go out the moment you approve', eta: 'right after your review' },
     ],
+    recap: {
+      since: 'since this morning',
+      items: [
+        { emoji: '✅', bold: '214 profiles scanned', rest: ' against your brief' },
+        { emoji: '✨', bold: '12 creators shortlisted', rest: ' — Katie hand-picked them' },
+        { emoji: '💌', bold: 'Availability checks out', rest: ' to our top picks' },
+      ],
+      closer: { clear: true, text: 'Nothing needs you until your shortlist lands — about 2 days' },
+    },
   },
   {
     day: 3,
@@ -54,6 +63,15 @@ const DAYS = [
       { emoji: '💌', text: 'Invites out within hours of your approvals', eta: 'same day' },
       { emoji: '📦', text: 'Product picks + shipping as creators accept', eta: 'this week' },
     ],
+    recap: {
+      since: 'since Monday',
+      items: [
+        { emoji: '✨', bold: '6 creators shortlisted', rest: ' — your lineup is ready' },
+        { emoji: '🔬', bold: 'Engagement checks passed', rest: ' on all 6 (4.2%+)' },
+        { emoji: '🧪', bold: 'Products matched', rest: ' to each creator' },
+      ],
+      closer: { text: '6 creators are waiting on you', cta: 'Review creators' },
+    },
   },
   {
     day: 9,
@@ -75,6 +93,16 @@ const DAYS = [
       { emoji: '🔁', text: 'Replacement picks for Lena', eta: 'within 48h — we’ll ping you' },
       { emoji: '🎬', text: 'First creators start filming', eta: 'this weekend' },
     ],
+    recap: {
+      since: 'since Friday',
+      items: [
+        { emoji: '✅', bold: '5 of 6 creators confirmed', rest: ' and ready to go' },
+        { emoji: '📦', bold: '4 packages shipped', rest: ' — first one already delivered' },
+        { emoji: '🔁', bold: '3 stand-ins vetted', rest: ' for Lena’s replacement' },
+        { emoji: '👋', bold: '2 delivery nudges sent', rest: ' — nothing needed your input' },
+      ],
+      closer: { clear: true, text: 'Nothing needs you until Thursday — all packages land' },
+    },
   },
   {
     day: 16,
@@ -97,6 +125,15 @@ const DAYS = [
       { emoji: '📣', text: 'First posts go live once you approve', eta: '~2 days after approval' },
       { emoji: '🎥', text: '3 more creators film this week', eta: 'submissions by Sunday' },
     ],
+    recap: {
+      since: 'since Sunday',
+      items: [
+        { emoji: '🎬', bold: '2 videos submitted', rest: ' — Jade’s reel is a stunner' },
+        { emoji: '📬', bold: 'All products delivered', rest: ' across the crew' },
+        { emoji: '🗓', bold: '3 shoots scheduled', rest: ' for this week' },
+      ],
+      closer: { text: '2 new videos are ready for a look', cta: 'Watch the first cuts' },
+    },
   },
   {
     day: 22,
@@ -119,6 +156,15 @@ const DAYS = [
       { emoji: '⏰', text: 'Maya’s post goes live', eta: 'Thursday' },
       { emoji: '🏁', text: 'Campaign wrap + your content library', eta: 'in 8 days' },
     ],
+    recap: {
+      since: 'since Monday',
+      items: [
+        { emoji: '📣', bold: '3 posts went live', rest: ' on IG & TikTok' },
+        { emoji: '👀', bold: '18.2k views', rest: ' and climbing' },
+        { emoji: '🔗', bold: 'Links shared by all 3', rest: ' — bio + pinned comments' },
+      ],
+      closer: { text: 'Nia’s reel is taking off', cta: 'Open the post' },
+    },
   },
   {
     day: 30,
@@ -141,6 +187,16 @@ const DAYS = [
     upNext: [
       { emoji: '🚀', text: 'Campaign #2 — same crew or fresh faces', eta: 'whenever you’re ready' },
     ],
+    recap: {
+      since: 'since last week',
+      items: [
+        { emoji: '🏆', bold: 'Top post: 18.9k views', rest: ' — Nia’s reel' },
+        { emoji: '🔗', bold: '1,142 link taps', rest: ' across all posts' },
+        { emoji: '💌', bold: 'Thank-yous sent', rest: ' to all 6 creators' },
+        { emoji: '📦', bold: '9 content files', rest: ' added to your library' },
+      ],
+      closer: { text: 'Your wrap-up is ready', cta: 'See the wrap-up' },
+    },
   },
 ];
 
@@ -153,6 +209,7 @@ const VARIANTS = [
   { key: 'H', name: 'Status band' },
   { key: 'I', name: 'Katie band' },
   { key: 'J', name: 'Katie note' },
+  { key: 'K', name: 'While away' },
 ];
 
 const RAIL_VARIANTS = ['E', 'F'];
@@ -485,6 +542,37 @@ export default function CampaignPulse() {
             </div>
           </section>
         </>
+      )}
+
+      {/* K: "while you were away" — the delta since last visit is the front door */}
+      {variant === 'K' && (
+        <div className="cp-recap" key={`k-${scene.day}`}>
+          <div className="cp-recap-card">
+            <div className="cp-recap-head">
+              <span className="cp-recap-title">👋 While you were away</span>
+              <span className="cp-recap-since">{scene.recap.since}</span>
+            </div>
+            <div className="cp-recap-body">
+              {scene.recap.items.map((it, i) => (
+                <div className="cp-recap-item" key={it.bold} style={{ animationDelay: `${0.07 * i}s` }}>
+                  <span className="cp-recap-emoji">{it.emoji}</span>
+                  <span className="cp-recap-text"><strong>{it.bold}</strong>{it.rest}</span>
+                </div>
+              ))}
+            </div>
+            {scene.recap.closer.clear ? (
+              <div className="cp-recap-closer cp-recap-closer--clear">
+                ✅ {scene.recap.closer.text}
+              </div>
+            ) : (
+              <div className="cp-recap-closer">
+                <span>{scene.recap.closer.text}</span>
+                <button type="button" className="cp-action-cta">{scene.recap.closer.cta}</button>
+              </div>
+            )}
+          </div>
+          <div className="cp-recap-note">The same recap lands as your Monday digest email 📧</div>
+        </div>
       )}
 
       {/* demo scrubber — presenter control, not product UI */}

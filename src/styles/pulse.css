@@ -711,3 +711,69 @@
 
 .cp-day-summary:hover .cp-day-summary-text { color: #1a1a1a; }
 .cp-day-summary-chev { flex: none; color: #b3b3b3; font-size: 15px; }
+
+/* ============================================================
+   K · While you were away — delta-since-last-visit recap card
+   ============================================================ */
+
+.cp-recap { margin-top: 4px; }
+
+.cp-recap-card {
+  max-width: 520px;
+  background: #fff;
+  border: 1px solid #ececec;
+  border-radius: 14px;
+  overflow: hidden;
+  animation: cp-in 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.cp-recap-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 18px 12px;
+  border-bottom: 1px solid #f1f1f1;
+}
+
+.cp-recap-title { font-size: 14.5px; font-weight: 600; color: #1a1a1a; }
+.cp-recap-since { font-size: 12px; color: #9a9a9a; white-space: nowrap; }
+
+.cp-recap-body { padding: 6px 18px 10px; }
+
+.cp-recap-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 7px 0;
+  animation: cp-in 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.cp-recap-emoji { flex: none; font-size: 14px; margin-top: 1px; }
+
+.cp-recap-text { font-size: 13.5px; line-height: 1.5; color: #444; }
+.cp-recap-text strong { color: #1a1a1a; font-weight: 600; }
+
+.cp-recap-closer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 18px;
+  border-top: 1px solid #f1f1f1;
+  font-size: 13.5px;
+  font-weight: 500;
+  color: #1a1a1a;
+}
+
+.cp-recap-closer--clear {
+  justify-content: flex-start;
+  background: #f2faf5;
+  color: #1c6b46;
+}
+
+.cp-recap-note {
+  font-size: 12px;
+  color: #9a9a9a;
+  margin: 10px 2px 0;
+}
