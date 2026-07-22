@@ -18,6 +18,8 @@ const DAYS = [
     scrubLabel: 'Day 1 · Launch',
     headline: 'Your campaign is live — we’re out scouting your creators. 🔍',
     updated: 'Updated 20 minutes ago',
+    katie: 'Already spotted a few gems this morning — sit tight!',
+    summary: 'We scanned 214 profiles and built your shortlist 🔍',
     feed: [
       { time: '4:41 pm', emoji: '📈', tone: 'win', text: 'Your shortlist is looking strong — final vetting happens tomorrow morning.' },
       { time: '1:15 pm', emoji: '💌', tone: 'busy', text: 'Reached out to our top picks to check availability and product fit.' },
@@ -36,6 +38,8 @@ const DAYS = [
     scrubLabel: 'Day 3 · Creators ready',
     headline: '6 creators are ready for your review! 🎉',
     updated: 'Updated 1 hour ago',
+    katie: 'These six gave me goosebumps. Go meet them!',
+    summary: 'Your shortlist arrived — 6 creators ready for review 🎉',
     feed: [
       { time: '2:20 pm', emoji: '🎁', tone: 'win', text: 'Your creator lineup is polished and waiting in the review tab.' },
       { time: '11:48 am', emoji: '🔬', tone: 'busy', text: 'Benny ran engagement checks on all 6 — everyone is above 4.2%.' },
@@ -56,6 +60,8 @@ const DAYS = [
     scrubLabel: 'Day 9 · Cooking',
     headline: 'Nothing you need to do — your campaign is cooking nicely. 🍳',
     updated: 'Updated 2 hours ago',
+    katie: 'Boxes are flying across the country as we speak 📦',
+    summary: 'Products shipped and the crew confirmed 📦',
     feed: [
       { time: '4:10 pm', emoji: '📦', tone: 'busy', text: 'Maya’s package cleared the Memphis hub — arriving Thursday.' },
       { time: '1:36 pm', emoji: '🧴', tone: 'win', text: 'Nia picked her hero product. “I’ve wanted to try this one forever” — good sign.' },
@@ -75,9 +81,11 @@ const DAYS = [
     scrubLabel: 'Day 16 · First content',
     headline: 'The first content is in — and it’s gorgeous. 🎬',
     updated: 'Updated 34 minutes ago',
+    katie: 'Jade’s beach reel?? I gasped. Go watch it.',
+    summary: 'First content came in — and it’s gorgeous 🎬',
     feed: [
-      { time: '3:55 pm', emoji: '✨', tone: 'win', text: 'Jade submitted a 34s reel — Katie’s note: “the light in this one is unreal”.' },
-      { time: '2:02 pm', emoji: '🎬', tone: 'win', text: 'Priya submitted her before/after story set.' },
+      { time: '3:55 pm', emoji: '✨', tone: 'win', text: 'Jade submitted a 34s reel — Katie’s note: “the light in this one is unreal”.', thumb: 'linear-gradient(135deg,#f5a041,#f5658c)' },
+      { time: '2:02 pm', emoji: '🎬', tone: 'win', text: 'Priya submitted her before/after story set.', thumb: 'linear-gradient(135deg,#41a7f5,#7cd6ff)' },
       { time: '12:40 pm', emoji: '🗓', tone: 'busy', text: 'Maya scheduled her shoot for Saturday — fingers crossed on weather.' },
       { time: '10:15 am', emoji: '🤳', tone: 'busy', text: 'Nia posted a behind-the-scenes teaser to her stories.' },
     ],
@@ -95,9 +103,11 @@ const DAYS = [
     scrubLabel: 'Day 22 · Going live',
     headline: '3 posts are live and your links are out in the wild! 📣',
     updated: 'Updated 12 minutes ago',
+    katie: 'Nia’s reel is taking off — 12.4k views and climbing 👀',
+    summary: 'Posts went live and links hit the wild 📣',
     feed: [
-      { time: '3:12 pm', emoji: '📈', tone: 'win', text: 'Nia’s reel passed 12.4k views — her best-performing post this month.' },
-      { time: '1:05 pm', emoji: '📣', tone: 'win', text: 'Sofia’s TikTok went live — we pinged you the second it did.' },
+      { time: '3:12 pm', emoji: '📈', tone: 'win', text: 'Nia’s reel passed 12.4k views — her best-performing post this month.', thumb: 'linear-gradient(135deg,#7a5cfa,#b48cff)' },
+      { time: '1:05 pm', emoji: '📣', tone: 'win', text: 'Sofia’s TikTok went live — we pinged you the second it did.', thumb: 'linear-gradient(135deg,#2e9e6b,#7fd8a8)' },
       { time: '11:30 am', emoji: '🔗', tone: 'busy', text: 'Jade added her link to bio + pinned comment.' },
       { time: '9:45 am', emoji: '🛰', tone: 'busy', text: 'We’re watching tags on IG & TikTok so nothing slips by.' },
     ],
@@ -115,8 +125,10 @@ const DAYS = [
     scrubLabel: 'Day 30 · Wrap',
     headline: 'That’s a wrap — 6 creators, 9 posts, 47k views. 🥳',
     updated: 'Updated just now',
+    katie: 'This one was special. Ready to run it back?',
+    summary: 'That’s a wrap 🥳',
     feed: [
-      { time: '4:30 pm', emoji: '🏆', tone: 'win', text: 'Top post: Nia’s reel — 18.9k views, 6.1% engagement.' },
+      { time: '4:30 pm', emoji: '🏆', tone: 'win', text: 'Top post: Nia’s reel — 18.9k views, 6.1% engagement.', thumb: 'linear-gradient(135deg,#ffd479,#ff9d6c)' },
       { time: '2:15 pm', emoji: '🔗', tone: 'win', text: 'Your links were tapped 1,142 times across all posts.' },
       { time: '11:00 am', emoji: '💌', tone: 'busy', text: 'Thank-you notes sent to all 6 creators on your behalf.' },
       { time: '9:30 am', emoji: '📦', tone: 'busy', text: 'All content files collected and added to your library.' },
@@ -139,25 +151,29 @@ const VARIANTS = [
   { key: 'E', name: 'Rail wide' },
   { key: 'F', name: 'Rail left' },
   { key: 'H', name: 'Status band' },
+  { key: 'I', name: 'Katie band' },
+  { key: 'J', name: 'Katie note' },
 ];
 
 const RAIL_VARIANTS = ['E', 'F'];
-const RAIL_HOST_VARIANTS = ['E', 'F', 'H'];
+const RAIL_HOST_VARIANTS = ['E', 'F', 'H', 'I', 'J'];
+const BAND_VARIANTS = ['H', 'I', 'J'];
 
 // Survive remounts (the captured-HTML subtree can wipe and re-mount the block).
 let persistedIdx = 2; // open on Day 9 — the "dead middle" is the thesis
 let persistedVariant = 'A';
 
-function Feed({ scene, compact }) {
+function Feed({ scene, compact, thumbs }) {
   return (
     <div className={compact ? 'cp-feed cp-feed--compact' : 'cp-feed'}>
       {scene.feed.map((f, i) => (
         <div key={f.text} className={`cp-feed-item cp-feed-item--${f.tone}`} style={{ animationDelay: `${0.06 * i}s` }}>
           <div className="cp-feed-icon">{f.emoji}</div>
-          <div>
+          <div style={{ flex: 1, minWidth: 0 }}>
             <div className="cp-feed-time">{f.time}</div>
             <div className="cp-feed-text">{f.text}</div>
           </div>
+          {thumbs && f.thumb && <span className="cp-feed-thumb" style={{ background: f.thumb }}>▶</span>}
         </div>
       ))}
     </div>
@@ -218,6 +234,13 @@ export default function CampaignPulse() {
   );
   const [pulseOpen, setPulseOpen] = useState(persistedPulseTab);
   const [tabBarEl, setTabBarEl] = useState(null);
+  const [openDays, setOpenDays] = useState(() => new Set());
+  const toggleDay = (day) =>
+    setOpenDays((prev) => {
+      const next = new Set(prev);
+      if (next.has(day)) next.delete(day); else next.add(day);
+      return next;
+    });
   const rootRef = useRef(null);
   const scene = DAYS[idx];
 
@@ -260,8 +283,8 @@ export default function CampaignPulse() {
     wrap.classList.toggle('cp-rail-child', on);
     column.classList.toggle('cp-rail-host', on);
     column.classList.toggle('cp-rail-host--wide', on);
-    column.classList.toggle('cp-rail-host--left', variant === 'F' || variant === 'H');
-    column.classList.toggle('cp-rail-host--h', variant === 'H');
+    column.classList.toggle('cp-rail-host--left', variant === 'F' || BAND_VARIANTS.includes(variant));
+    column.classList.toggle('cp-rail-host--h', BAND_VARIANTS.includes(variant));
     return () => {
       wrap.classList.remove('cp-rail-child');
       column.classList.remove('cp-rail-host', 'cp-rail-host--wide', 'cp-rail-host--left', 'cp-rail-host--h');
@@ -391,13 +414,20 @@ export default function CampaignPulse() {
         </div>
       )}
 
-      {/* H: quiet full-width status band, then two matched sections */}
-      {variant === 'H' && (
+      {/* H/I/J: full-width status band, then two matched sections.
+          I adds Katie + warm band + thumbnails + collapsed history; J adds her handwritten note. */}
+      {BAND_VARIANTS.includes(variant) && (
         <>
-          <div className="cp-band" key={`h-band-${scene.day}`}>
-            <div>
-              <h2 className="cp-band-headline">{scene.headline}</h2>
-              <span className="cp-band-updated">{scene.updated}</span>
+          <div className={variant === 'H' ? 'cp-band' : 'cp-band cp-band--warm'} key={`h-band-${variant}-${scene.day}`}>
+            <div className="cp-band-left">
+              {variant !== 'H' && <div className="cp-katie">K</div>}
+              <div>
+                <h2 className="cp-band-headline">{scene.headline}</h2>
+                <span className="cp-band-updated">
+                  {variant === 'H' ? scene.updated : `Katie · your campaign manager · ${scene.updated.toLowerCase()}`}
+                </span>
+                {variant === 'J' && <div className="cp-katie-note">“{scene.katie}”</div>}
+              </div>
             </div>
             <div className="cp-band-right">
               {scene.forYou.map((a) => (
@@ -418,13 +448,29 @@ export default function CampaignPulse() {
             <h3 className="cp-section-title">Today at Benable</h3>
             <p className="cp-section-sub">Everything we're doing on your campaign — updated live</p>
           </div>
-          <section className="cp-sec-card" key={`h-card-${scene.day}`}>
-            {[...DAYS.slice(0, idx + 1)].reverse().map((d, i) => (
-              <div key={d.day} className={i === 0 ? 'cp-journal-day' : 'cp-journal-day cp-journal-day--past'}>
-                {i > 0 && <div className="cp-journal-label"><span>{`Day ${d.day}`}</span></div>}
-                <Feed scene={d} compact={i !== 0} />
-              </div>
-            ))}
+          <section className="cp-sec-card" key={`h-card-${variant}-${scene.day}`}>
+            {[...DAYS.slice(0, idx + 1)].reverse().map((d, i) => {
+              if (i === 0) return <Feed key={d.day} scene={d} thumbs={variant !== 'H'} />;
+              if (variant === 'H') {
+                return (
+                  <div key={d.day} className="cp-journal-day cp-journal-day--past">
+                    <div className="cp-journal-label"><span>{`Day ${d.day}`}</span></div>
+                    <Feed scene={d} compact />
+                  </div>
+                );
+              }
+              const open = openDays.has(d.day);
+              return (
+                <div key={d.day} className="cp-journal-day cp-journal-day--past">
+                  <button type="button" className="cp-day-summary" onClick={() => toggleDay(d.day)}>
+                    <span className="cp-day-summary-label">Day {d.day}</span>
+                    <span className="cp-day-summary-text">{d.summary}</span>
+                    <span className="cp-day-summary-chev">{open ? '−' : '+'}</span>
+                  </button>
+                  {open && <Feed scene={d} compact thumbs />}
+                </div>
+              );
+            })}
             <div className="cp-h-upnext">
               <div className="cp-overline" style={{ margin: '16px 0 10px' }}>Up next</div>
               {scene.upNext.map((u) => (

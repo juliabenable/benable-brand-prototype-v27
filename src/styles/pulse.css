@@ -621,3 +621,93 @@
 
 /* H card: up-next block under the journal */
 .cp-h-upnext { border-top: 1px solid #f1f1f1; margin-top: 14px; }
+
+/* ============================================================
+   I / J — Katie in the band, warmth, thumbnails, collapsed days
+   ============================================================ */
+
+.cp-band--warm {
+  background: linear-gradient(180deg, #faf7f1 0%, #fbf9f5 100%);
+  border: 1px solid #f0e7d8;
+}
+
+.cp-band-left {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  min-width: 0;
+}
+
+.cp-katie {
+  flex: none;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-weight: 700;
+  font-size: 17px;
+  color: #fff;
+  background: linear-gradient(135deg, #7a5cfa, #b48cff);
+  border: 2.5px solid #fff;
+  box-shadow: 0 3px 10px #7a5cfa3d;
+}
+
+.cp-katie-note {
+  font-family: 'Caveat', cursive;
+  font-size: 22px;
+  line-height: 1.1;
+  color: #8a6d2f;
+  margin-top: 7px;
+}
+
+/* content thumbnails on feed lines */
+.cp-feed-thumb {
+  flex: none;
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+  color: #ffffffd9;
+  font-size: 11px;
+  box-shadow: 0 2px 8px #00000022;
+  align-self: center;
+}
+
+.cp-feed--compact .cp-feed-thumb { width: 34px; height: 34px; border-radius: 8px; }
+
+/* collapsed past days */
+.cp-day-summary {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 12px 0 4px;
+  text-align: left;
+}
+
+.cp-day-summary-label {
+  flex: none;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: #9a9a9a;
+}
+
+.cp-day-summary-text {
+  flex: 1;
+  min-width: 0;
+  font-size: 13px;
+  color: #717171;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cp-day-summary:hover .cp-day-summary-text { color: #1a1a1a; }
+.cp-day-summary-chev { flex: none; color: #b3b3b3; font-size: 15px; }
