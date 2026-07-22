@@ -304,45 +304,10 @@
 /* ---- E · Rail wide: same idea, roomier column ---- */
 .cp-rail-host--wide { grid-template-columns: minmax(0, 1fr) 404px; }
 
-/* ---- F · Rail left, refined: full-width lead, two same-grammar sections ----
-   The .cp-host wrapper and .cp-root dissolve (display: contents) so the lead,
-   section head, and pulse card become grid items of the host column. */
+/* ---- F · Rail left: mirrored — pulse left, content right ---- */
 .cp-rail-host--left { grid-template-columns: 404px minmax(0, 1fr); }
 .cp-rail-host--left > * { grid-column: 2; }
-.cp-rail-host--left > .cp-rail-child,
-.cp-rail-host--left .cp-root--f { display: contents; }
-
-.cp-rail-host--left .cp-root--f > .cp-lead { grid-column: 1 / -1; grid-row: 2; margin: 22px 0 2px; }
-.cp-rail-host--left .cp-root--f > .cp-f-head { grid-column: 1; grid-row: 3; margin-bottom: 12px; }
-.cp-rail-host--left .cp-root--f > .cp-f-card { grid-column: 1; grid-row: 4 / span 27; align-self: start; }
-.cp-rail-host--left > .stage-top-card { grid-row: 3 / span 28; }
-
-.cp-f-card {
-  background: #fff;
-  border: 1px solid #ececec;
-  border-radius: 12px;
-  padding: 20px 22px;
-}
-
-.cp-f-footer {
-  border-top: 1px solid #f1f1f1;
-  margin-top: 16px;
-  padding-top: 14px;
-}
-
-.cp-f-footer-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  margin-bottom: 8px;
-}
-
-.cp-f-pace-text { font-size: 13px; font-weight: 600; color: #1a1a1a; }
-.cp-f-pace-day { font-size: 12px; color: #717171; }
-.cp-track--mini { height: 6px; }
-
-/* right-side header: keep Add Creators + Filter on one row */
-.cp-rail-host .creator-tracking-header-actions { flex-wrap: nowrap !important; }
+.cp-rail-host--left > .cp-rail-child { grid-column: 1; }
 
 .cp-rail--wide { padding: 22px 24px 24px; }
 .cp-rail--wide .cp-lead { margin-bottom: 6px; }
