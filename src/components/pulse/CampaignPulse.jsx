@@ -98,7 +98,10 @@ const VARIANTS = [
   { key: 'C', name: 'Rail' },
   { key: 'D', name: 'Open' },
   { key: 'E', name: 'Rail wide' },
+  { key: 'F', name: 'Rail left' },
 ];
+
+const RAIL_VARIANTS = ['C', 'E', 'F'];
 
 // Survive remounts (the captured-HTML subtree can wipe and re-mount the block).
 let persistedIdx = 2; // open on Day 9 — the "dead middle" is the thesis
@@ -166,13 +169,14 @@ export default function CampaignPulse() {
     const wrap = rootRef.current?.parentElement;
     const column = wrap?.classList.contains('cp-host') ? wrap.parentElement : wrap;
     if (!wrap || !column) return;
-    const on = variant === 'C' || variant === 'E';
+    const on = RAIL_VARIANTS.includes(variant);
     wrap.classList.toggle('cp-rail-child', on);
     column.classList.toggle('cp-rail-host', on);
-    column.classList.toggle('cp-rail-host--wide', variant === 'E');
+    column.classList.toggle('cp-rail-host--wide', variant === 'E' || variant === 'F');
+    column.classList.toggle('cp-rail-host--left', variant === 'F');
     return () => {
       wrap.classList.remove('cp-rail-child');
-      column.classList.remove('cp-rail-host', 'cp-rail-host--wide');
+      column.classList.remove('cp-rail-host', 'cp-rail-host--wide', 'cp-rail-host--left');
     };
   }, [variant]);
 
@@ -224,8 +228,8 @@ export default function CampaignPulse() {
         </div>
       )}
 
-      {(variant === 'C' || variant === 'E') && (
-        <aside className={variant === 'E' ? 'cp-rail cp-rail--wide' : 'cp-rail'} key={`${variant}-${scene.day}`}>
+      {RAIL_VARIANTS.includes(variant) && (
+        <aside className={variant === 'C' ? 'cp-rail' : 'cp-rail cp-rail--wide'} key={`${variant}-${scene.day}`}>
           <Lead scene={scene} small={variant === 'C'} />
           <div className="cp-overline" style={{ marginTop: 14 }}>Today at Benable</div>
           <Feed scene={scene} compact={variant === 'C'} />
