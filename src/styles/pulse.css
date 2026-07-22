@@ -309,6 +309,10 @@
 .cp-rail-host--left > * { grid-column: 2; }
 .cp-rail-host--left > .cp-rail-child { grid-column: 1; }
 
+/* align the gray rail's top edge with the "Invited Creators" title */
+.cp-rail-host--left > .cp-rail-child { margin-top: 0; }
+.cp-rail-host--left > .cp-rail-child .cp-root { margin-top: 0; }
+
 .cp-rail--wide { padding: 22px 24px 24px; }
 .cp-rail--wide .cp-lead { margin-bottom: 6px; }
 .cp-rail--wide .cp-lead-headline { font-size: 18px; }
