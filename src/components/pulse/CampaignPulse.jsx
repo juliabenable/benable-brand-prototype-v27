@@ -228,7 +228,7 @@ export default function CampaignPulse() {
         </div>
       )}
 
-      {RAIL_VARIANTS.includes(variant) && (
+      {(variant === 'C' || variant === 'E') && (
         <aside className={variant === 'C' ? 'cp-rail' : 'cp-rail cp-rail--wide'} key={`${variant}-${scene.day}`}>
           <Lead scene={scene} small={variant === 'C'} />
           <div className="cp-overline" style={{ marginTop: 14 }}>Today at Benable</div>
@@ -237,6 +237,29 @@ export default function CampaignPulse() {
           <div className="cp-overline">The pace</div>
           <PaceBars scene={scene} />
         </aside>
+      )}
+
+      {/* F: full-width lead, then two same-grammar sections (pulse left, creators right) */}
+      {variant === 'F' && (
+        <>
+          <Lead key={`f-lead-${scene.day}`} scene={scene} />
+          <div className="cp-section-head cp-f-head" key="f-head">
+            <h3 className="cp-section-title">Today at Benable</h3>
+            <p className="cp-section-sub">Everything we're doing on your campaign — updated live</p>
+          </div>
+          <section className="cp-f-card" key={`f-card-${scene.day}`}>
+            <Feed scene={scene} />
+            <div className="cp-f-footer">
+              <div className="cp-f-footer-row">
+                <span className="cp-f-pace-text">{scene.race.chip}</span>
+                <span className="cp-f-pace-day">day {scene.day} of 30</span>
+              </div>
+              <div className="cp-track cp-track--mini">
+                <div className="cp-fill cp-fill--you" style={{ width: `${scene.race.you}%` }} />
+              </div>
+            </div>
+          </section>
+        </>
       )}
 
       {variant === 'D' && (
