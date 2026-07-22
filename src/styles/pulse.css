@@ -290,6 +290,14 @@
   margin: 16px 0 14px;
 }
 
+/* When the rail is active, let the captured creators table reflow to the
+   narrower main column instead of overflowing at its 920px min-width. */
+.cp-rail-host .creator-management-table { min-width: 0 !important; width: 100%; }
+.cp-rail-host .creator-management-table th,
+.cp-rail-host .creator-management-table td { padding-left: 10px; padding-right: 10px; }
+.cp-rail-host .creator-management-table .row-action-btn { white-space: nowrap; }
+.cp-rail-host .creator-row-actions { flex-wrap: nowrap; justify-content: flex-end; }
+
 /* ---- E · Rail wide: same idea, roomier column ---- */
 .cp-rail-host--wide { grid-template-columns: minmax(0, 1fr) 404px; }
 
