@@ -645,16 +645,16 @@ export default function CampaignPulse() {
       {variant === 'L' && (
         <div className="cp-tiles" key={`l-${scene.day}`}>
           <RecapTile scene={scene} />
-          <PaceTile scene={scene} />
           <UpNextTile scene={scene} />
+          <PaceTile scene={scene} />
         </div>
       )}
 
       {(variant === 'M' || variant === 'N') && (
         <div className="cp-tile-stack" key={`${variant}-${scene.day}`}>
           <RecapTile scene={scene} />
-          <PaceTile scene={scene} />
           <UpNextTile scene={scene} />
+          <PaceTile scene={scene} />
         </div>
       )}
 
