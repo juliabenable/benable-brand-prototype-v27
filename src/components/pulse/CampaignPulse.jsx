@@ -263,6 +263,16 @@ const CREW = {
   ],
 };
 
+const PHOTOS = {
+  Maya: `${import.meta.env.BASE_URL}creators/maya.jpg`,
+  Nia: `${import.meta.env.BASE_URL}creators/nia.jpg`,
+  Sofia: `${import.meta.env.BASE_URL}creators/sofia.jpg`,
+  Jade: `${import.meta.env.BASE_URL}creators/jade.jpg`,
+  Priya: `${import.meta.env.BASE_URL}creators/priya.jpg`,
+  Amara: `${import.meta.env.BASE_URL}creators/amara.jpg`,
+  Lena: `${import.meta.env.BASE_URL}creators/lena.jpg`,
+};
+
 const CREW_META = {
   Maya: { fol: '64k', plat: 'Instagram' },
   Nia: { fol: '88k', plat: 'TikTok' },
@@ -364,7 +374,10 @@ const VARIANTS = [
   { key: 'M', name: 'Tiles right' },
   { key: 'N', name: 'Tiles left' },
   { key: 'O', name: 'Crew live' },
+  { key: 'P', name: 'Crew photos' },
 ];
+
+const CREW_VARIANTS = ['O', 'P'];
 
 const RAIL_VARIANTS = ['E', 'F'];
 const RAIL_HOST_VARIANTS = ['E', 'F', 'H', 'I', 'J', 'M', 'N'];
@@ -602,7 +615,7 @@ export default function CampaignPulse() {
     const wrap = rootRef.current?.parentElement;
     const column = wrap?.classList.contains('cp-host') ? wrap.parentElement : wrap;
     if (!column) return undefined;
-    column.classList.toggle('cp-crew-mode', variant === 'O');
+    column.classList.toggle('cp-crew-mode', CREW_VARIANTS.includes(variant));
     return () => column.classList.remove('cp-crew-mode');
   }, [variant]);
 
@@ -878,8 +891,9 @@ export default function CampaignPulse() {
         </div>
       )}
 
-      {/* O: the dashboard becomes a creator-per-creator live view; click a row for its history */}
-      {variant === 'O' && (
+      {/* O/P: the dashboard becomes a creator-per-creator live view; click a row for its history.
+          P swaps the gradient initials for real portrait photos. */}
+      {CREW_VARIANTS.includes(variant) && (
         <div className="cp-crew" key={`o-${scene.day}`}>
           <Lead scene={scene} />
           {CREW_BANNERS[scene.day] && (
@@ -897,12 +911,18 @@ export default function CampaignPulse() {
               return (
                 <div key={rowKey} className={c.action ? 'cp-crew-item cp-crew-item--action' : 'cp-crew-item'}>
                   <button type="button" className="cp-crew-row" style={{ animationDelay: `${0.05 * i}s` }} onClick={() => toggleCrew(rowKey)}>
-                    <div
-                      className={c.mystery ? 'cp-crew-avatar cp-crew-avatar--mystery' : 'cp-crew-avatar'}
-                      style={c.mystery ? {} : { background: HUES[c.name] }}
-                    >
-                      {c.mystery ? '?' : c.name[0]}
-                    </div>
+                    {variant === 'P' && !c.mystery && PHOTOS[c.name] ? (
+                      <div className="cp-crew-avatar cp-crew-avatar--photo">
+                        <img src={PHOTOS[c.name]} alt={c.name} />
+                      </div>
+                    ) : (
+                      <div
+                        className={c.mystery ? 'cp-crew-avatar cp-crew-avatar--mystery' : 'cp-crew-avatar'}
+                        style={c.mystery ? {} : { background: HUES[c.name] }}
+                      >
+                        {c.mystery ? '?' : c.name[0]}
+                      </div>
+                    )}
                     <div className="cp-crew-main">
                       <div className="cp-crew-toprow">
                         <span className="cp-crew-name">{c.handle || c.name}</span>

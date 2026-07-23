@@ -1176,3 +1176,18 @@
 .cp-hist-step--next .cp-hist-detail { color: #b3b3b3; }
 
 .cp-hist-live { margin-top: 6px; }
+
+/* ---- P · Crew photos: real portraits in the crew rows ---- */
+.cp-crew-avatar--photo {
+  overflow: hidden;
+  padding: 0;
+  background: #f1f1f1;
+}
+
+.cp-crew-avatar--photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  display: block;
+}
