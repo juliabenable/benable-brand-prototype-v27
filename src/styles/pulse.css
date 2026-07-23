@@ -1254,3 +1254,8 @@
 .cp-tile-stack--gray .cp-track { background: #ececec; }
 .cp-tile-stack--gray .cp-inline-act { background: #e4dbff; }
 .cp-tile-stack--gray .cp-upnext-item { border-color: #d9d9d9; }
+
+/* ---- U · tiles column on the LEFT of the crew table ---- */
+.cp-crew-cols--left { grid-template-columns: 344px minmax(0, 1fr); }
+.cp-crew-cols--left > .cp-crew-left { order: 2; }
+.cp-crew-cols--left > .cp-tile-stack { order: 1; }
