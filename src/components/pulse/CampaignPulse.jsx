@@ -23,7 +23,7 @@ const DAYS = [
     feed: [
       { time: '4:41 pm', emoji: '📈', tone: 'win', text: 'Your shortlist is looking strong — final vetting happens tomorrow morning.' },
       { time: '1:15 pm', emoji: '💌', tone: 'busy', text: 'Reached out to our top picks to check availability and product fit.' },
-      { time: '10:32 am', emoji: '👀', tone: 'busy', text: 'Katie hand-reviewed 31 profiles — 12 made the shortlist.' },
+      { time: '10:32 am', emoji: '👀', tone: 'busy', text: 'Katie’s team hand-reviewed 31 profiles — 12 made the shortlist.' },
       { time: '9:04 am', emoji: '🤖', tone: 'busy', text: 'Scanned 214 creator profiles against your brief.' },
     ],
     race: { you: 8, them: 2, caption: 'Day 1 — most brands are still writing the brief. Yours is already in the field.', chip: '🚀 Ahead before day one is over' },
@@ -36,7 +36,7 @@ const DAYS = [
       since: 'since this morning',
       items: [
         { emoji: '✅', bold: '214 profiles scanned', rest: ' against your brief' },
-        { emoji: '✨', bold: '12 creators shortlisted', rest: ' — Katie hand-picked them' },
+        { emoji: '✨', bold: '12 creators shortlisted', rest: ' — Katie’s team hand-picked them' },
         { emoji: '💌', bold: 'Availability checks out', rest: ' to our top picks' },
       ],
       closer: { clear: true, text: 'Nothing needs you until your shortlist lands — about 2 days' },
@@ -53,7 +53,7 @@ const DAYS = [
       { time: '2:20 pm', emoji: '🎁', tone: 'win', text: 'Your creator lineup is polished and waiting in the review tab.' },
       { time: '11:48 am', emoji: '🔬', tone: 'busy', text: 'Benny ran engagement checks on all 6 — everyone is above 4.2%.' },
       { time: '10:05 am', emoji: '🧪', tone: 'busy', text: 'Matched each creator to the products they’ll love most.' },
-      { time: '9:12 am', emoji: '☕️', tone: 'busy', text: 'Katie did a final pass over the shortlist with fresh eyes.' },
+      { time: '9:12 am', emoji: '☕️', tone: 'busy', text: 'Katie’s team did a final pass over the shortlist with fresh eyes.' },
     ],
     race: { you: 18, them: 5, caption: 'Day 3 and your shortlist is ready. <strong>Industry average: day 12.</strong>', chip: '🚀 Shortlist 9 days ahead of average' },
     forYou: [
@@ -112,7 +112,7 @@ const DAYS = [
     katie: 'Jade’s beach reel?? I gasped. Go watch it.',
     summary: 'First content came in — and it’s gorgeous 🎬',
     feed: [
-      { time: '3:55 pm', emoji: '✨', tone: 'win', text: 'Jade submitted a 34s reel — Katie’s note: “the light in this one is unreal”.', thumb: 'linear-gradient(135deg,#f5a041,#f5658c)' },
+      { time: '3:55 pm', emoji: '✨', tone: 'win', text: 'Jade submitted a 34s reel — team note: “the light in this one is unreal”.', thumb: 'linear-gradient(135deg,#f5a041,#f5658c)' },
       { time: '2:02 pm', emoji: '🎬', tone: 'win', text: 'Priya submitted her before/after story set.', thumb: 'linear-gradient(135deg,#41a7f5,#7cd6ff)' },
       { time: '12:40 pm', emoji: '🗓', tone: 'busy', text: 'Maya scheduled her shoot for Saturday — fingers crossed on weather.' },
       { time: '10:15 am', emoji: '🤳', tone: 'busy', text: 'Nia posted a behind-the-scenes teaser to her stories.' },
@@ -234,7 +234,7 @@ const CREW = {
     { name: 'Nia', handle: '@niaglow', stage: 1, status: { type: 'facts', phrases: ['🧴 Picked SPF 50 Tinted', 'Shipping label on its way'] } },
     { name: 'Sofia', handle: '@sofia.films', stage: 1, status: { type: 'static', phrases: ['✅ Confirmed — shipping next'] } },
     { name: 'Jade', handle: '@jadebythesea', stage: 3, status: { type: 'facts', phrases: ['📬 Delivered yesterday', 'Planning her shoot 💭'] } },
-    { name: 'Priya', handle: '@priyacreates', stage: 1, status: { type: 'facts', phrases: ['💭 Sketching content ideas', 'Confirmed her angle with Katie'] } },
+    { name: 'Priya', handle: '@priyacreates', stage: 1, status: { type: 'facts', phrases: ['💭 Sketching content ideas', 'Confirmed her angle with Katie’s team'] } },
     { mystery: true, name: 'Casting…', stage: 0, status: { type: 'shimmer', counter: 327, phrases: ['Casting her replacement…', 'Vetting 3 stand-ins…', 'Checking availability…'] } },
   ],
   16: [
@@ -250,7 +250,7 @@ const CREW = {
     { name: 'Sofia', handle: '@sofia.films', stage: 5, status: { type: 'celebrate', emoji: '💬', phrases: ['Live on TikTok — already getting comments'] } },
     { name: 'Jade', handle: '@jadebythesea', stage: 5, status: { type: 'celebrate', emoji: '✨', phrases: ['Live — engagement is starting · 214 link taps'] } },
     { name: 'Maya', handle: '@maya.skin', stage: 4, status: { type: 'facts', phrases: ['⏰ Posting Thursday', 'Draft approved ✅'] } },
-    { name: 'Priya', handle: '@priyacreates', stage: 4, status: { type: 'katie', phrases: ['Katie is scheduling her post'] } },
+    { name: 'Priya', handle: '@priyacreates', stage: 4, status: { type: 'katie', phrases: ['Katie’s team is scheduling her post'] } },
     { name: 'Amara', handle: '@amara.gold', stage: 4, status: { type: 'facts', phrases: ['🎬 Final edits — due Sunday'] } },
   ],
   30: [
@@ -320,7 +320,7 @@ const TIMELINES = {
     { when: 'Thu', detail: 'TikTok live — tags verified' },
   ],
   Jade: [
-    { when: 'Mon 9:02 am', detail: 'Hand-picked by Katie — “the light in her work”' },
+    { when: 'Mon 9:02 am', detail: 'Hand-picked by Katie’s team — “the light in her work”' },
     { when: 'Tue', detail: 'Accepted + shared her moodboard' },
     { when: 'Wed', detail: 'Shipped same day' },
     { when: 'Thu', detail: 'Delivered — she unboxed on stories' },
@@ -329,7 +329,7 @@ const TIMELINES = {
   ],
   Priya: [
     { when: 'Mon 9:02 am', detail: 'Matched — strong before/after format' },
-    { when: 'Tue', detail: 'Accepted, confirmed her angle with Katie' },
+    { when: 'Tue', detail: 'Accepted, confirmed her angle with Katie’s team' },
     { when: 'Thu', detail: 'Shipped' },
     { when: 'Fri', detail: 'Delivered' },
     { when: 'Mon', detail: 'Shot her story set · submitted Tuesday' },
@@ -356,7 +356,7 @@ const TIMELINES = {
 const CASTING_TIMELINE = [
   { label: 'Brief studied', when: 'this morning', detail: 'Palette, tone and audience mapped' },
   { label: 'Scanning', live: true, detail: 'Working through the creator graph' },
-  { label: 'Shortlisting', eta: 'next', detail: 'Top matches go to Katie for a human pass' },
+  { label: 'Shortlisting', eta: 'next', detail: 'Top matches go to Katie’s team for a human pass' },
   { label: 'Your review', eta: '~2 days', detail: 'Cards land in your queue' },
 ];
 
@@ -381,9 +381,10 @@ const VARIANTS = [
   { key: 'T', name: 'Gray tiles' },
   { key: 'U', name: 'Tiles + crew' },
   { key: 'V', name: 'Gray + crew' },
+  { key: 'W', name: 'Live bar' },
 ];
 
-const CREW_VARIANTS = ['O', 'P', 'Q', 'R', 'U', 'V'];
+const CREW_VARIANTS = ['O', 'P', 'Q', 'R', 'U', 'V', 'W'];
 
 const RAIL_VARIANTS = ['E', 'F'];
 const RAIL_HOST_VARIANTS = ['E', 'F', 'H', 'I', 'J', 'M', 'N', 'S', 'T'];
@@ -500,6 +501,34 @@ function LiveStatus({ status, noEmoji }) {
     return <span className="cp-live"><span className="cp-live-fact cp-live-fact--gray cp-live-fact--still">{clean(status.phrases?.[0] ?? '')}</span></span>;
   }
   return <span className="cp-live"><span className="cp-live-fact">{phrase}</span></span>;
+}
+
+/* --- live-posts progression bar: exists only once the first creator is live --- */
+function LiveBarTile({ scene }) {
+  const crew = CREW[scene.day] || [];
+  const live = crew.filter((c) => c.stage === 5).length;
+  const total = crew.length;
+  if (!live) return null;
+  return (
+    <div className="cp-recap-card">
+      <div className="cp-recap-head">
+        <span className="cp-recap-title">📣 Creators live</span>
+        <span className="cp-recap-since">{live} of {total}</span>
+      </div>
+      <div className="cp-recap-body">
+        <div className="cp-livebar">
+          {crew.map((c, i) => (
+            <span
+              key={`${c.name}-${i}`}
+              className={c.stage === 5 ? 'cp-liveseg cp-liveseg--on' : 'cp-liveseg'}
+              style={{ animationDelay: `${0.12 * i}s` }}
+            />
+          ))}
+        </div>
+        <p className="cp-livebar-cap">{live === total ? 'Everyone’s live 🎉' : `${total - live} more to come`}</p>
+      </div>
+    </div>
+  );
 }
 
 /* --- harmonized tiles: identical head/body/footer anatomy --- */
@@ -791,7 +820,7 @@ export default function CampaignPulse() {
               <div>
                 <h2 className="cp-band-headline">{scene.headline}</h2>
                 <span className="cp-band-updated">
-                  {variant === 'H' ? scene.updated : `Katie · your campaign manager · ${scene.updated.toLowerCase()}`}
+                  {variant === 'H' ? scene.updated : `Katie’s team · managing your campaign · ${scene.updated.toLowerCase()}`}
                 </span>
                 {variant === 'J' && <div className="cp-katie-note">“{scene.katie}”</div>}
               </div>
@@ -907,7 +936,7 @@ export default function CampaignPulse() {
       {CREW_VARIANTS.includes(variant) && (
         <div className="cp-crew" key={`o-${scene.day}`}>
           <Lead scene={scene} />
-          <div className={variant === 'U' || variant === 'V' ? 'cp-crew-cols cp-crew-cols--left' : variant === 'Q' || variant === 'R' ? 'cp-crew-cols' : ''}>
+          <div className={['U', 'V', 'W'].includes(variant) ? 'cp-crew-cols cp-crew-cols--left' : variant === 'Q' || variant === 'R' ? 'cp-crew-cols' : ''}>
           <div className="cp-crew-left">
           {CREW_BANNERS[scene.day] && (
             <div className={`cp-crew-banner cp-crew-banner--${CREW_BANNERS[scene.day].tone}`}>
@@ -941,7 +970,7 @@ export default function CampaignPulse() {
                         <span className="cp-crew-name">{c.handle || c.name}</span>
                         {meta && <span className="cp-crew-meta">{meta.fol} · {meta.plat}</span>}
                       </div>
-                      <div className="cp-crew-statusline"><LiveStatus status={c.status} noEmoji={variant === 'V'} /></div>
+                      <div className="cp-crew-statusline"><LiveStatus status={c.status} noEmoji={variant === 'V' || variant === 'W'} /></div>
                     </div>
                     {c.action && (
                       <span
@@ -978,7 +1007,7 @@ export default function CampaignPulse() {
                                 <span className="cp-hist-when">{state === 'done' ? (st.when || 'done') : state === 'now' ? 'right now' : ''}</span>
                               </div>
                               <div className="cp-hist-detail">{st.detail}</div>
-                              {state === 'now' && <div className="cp-hist-live"><LiveStatus status={c.status} noEmoji={variant === 'V'} /></div>}
+                              {state === 'now' && <div className="cp-hist-live"><LiveStatus status={c.status} noEmoji={variant === 'V' || variant === 'W'} /></div>}
                             </div>
                           </div>
                         );
@@ -1005,14 +1034,15 @@ export default function CampaignPulse() {
                 <div className="cp-katie">K</div>
                 <div>
                   <div className="cp-katie-note">“{scene.katie}”</div>
-                  <div className="cp-katie-byline">Katie · your campaign manager</div>
+                  <div className="cp-katie-byline">Katie · for your Benable team</div>
                 </div>
               </div>
             </aside>
           )}
 
-          {(variant === 'R' || variant === 'U' || variant === 'V') && (
-            <aside className={variant === 'V' ? 'cp-tile-stack cp-tile-stack--gray' : 'cp-tile-stack'}>
+          {['R', 'U', 'V', 'W'].includes(variant) && (
+            <aside className={variant === 'V' || variant === 'W' ? 'cp-tile-stack cp-tile-stack--gray' : 'cp-tile-stack'}>
+              {variant === 'W' && <LiveBarTile scene={scene} />}
               <RecapTile scene={scene} />
               <UpNextTile scene={scene} />
               <PaceTile scene={scene} />
