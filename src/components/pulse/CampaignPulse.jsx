@@ -204,7 +204,7 @@ const DAYS = [
    live-status study rules: shimmer = bounded machine work happening now;
    katie = human presence, never a spinner; heartbeat = monitoring w/ recency;
    facts = dated truths while waiting on creators; static = settled. */
-const STAGE_LABELS = ['Invited', 'Confirmed', 'Product', 'Filming', 'Submitted', 'Live'];
+const STAGE_LABELS = ['Invited', 'Confirmed', 'Product Shipped', 'Product Delivered', 'Filming', 'Live'];
 
 const HUES = {
   Maya: 'linear-gradient(135deg,#ff9d6c,#f5658c)',
@@ -231,18 +231,18 @@ const CREW = {
   ],
   9: [
     { name: 'Maya', handle: '@maya.skin', stage: 2, status: { type: 'facts', phrases: ['📦 Cleared the Memphis hub', 'Arriving Thursday', 'Tracking checked 12 min ago'] } },
-    { name: 'Nia', handle: '@niaglow', stage: 2, status: { type: 'facts', phrases: ['🧴 Picked SPF 50 Tinted', 'Shipping label on its way'] } },
+    { name: 'Nia', handle: '@niaglow', stage: 1, status: { type: 'facts', phrases: ['🧴 Picked SPF 50 Tinted', 'Shipping label on its way'] } },
     { name: 'Sofia', handle: '@sofia.films', stage: 1, status: { type: 'static', phrases: ['✅ Confirmed — shipping next'] } },
-    { name: 'Jade', handle: '@jadebythesea', stage: 2, status: { type: 'facts', phrases: ['📬 Delivered yesterday', 'Planning her shoot 💭'] } },
+    { name: 'Jade', handle: '@jadebythesea', stage: 3, status: { type: 'facts', phrases: ['📬 Delivered yesterday', 'Planning her shoot 💭'] } },
     { name: 'Priya', handle: '@priyacreates', stage: 1, status: { type: 'facts', phrases: ['💭 Sketching content ideas', 'Confirmed her angle with Katie'] } },
     { mystery: true, name: 'Casting…', stage: 0, status: { type: 'shimmer', counter: 327, phrases: ['Casting her replacement…', 'Vetting 3 stand-ins…', 'Checking availability…'] } },
   ],
   16: [
     { name: 'Jade', handle: '@jadebythesea', stage: 4, action: { cta: 'Review reel' }, status: { type: 'static', phrases: ['Her reel passed every check — waiting on your approval since 9:40 am'] } },
     { name: 'Priya', handle: '@priyacreates', stage: 4, status: { type: 'shimmer', phrases: ['Verifying your required link…', 'Checking the disclosure tag…', 'Running brand-safety checks…'] } },
-    { name: 'Maya', handle: '@maya.skin', stage: 3, status: { type: 'facts', phrases: ['🎥 Filming Saturday — confirmed Tuesday'] } },
-    { name: 'Nia', handle: '@niaglow', stage: 3, status: { type: 'facts', phrases: ['🤳 Posted a BTS teaser to stories'] } },
-    { name: 'Sofia', handle: '@sofia.films', stage: 3, status: { type: 'facts', phrases: ['💭 Storyboarding her before/after'] } },
+    { name: 'Maya', handle: '@maya.skin', stage: 4, status: { type: 'facts', phrases: ['🎥 Filming Saturday — confirmed Tuesday'] } },
+    { name: 'Nia', handle: '@niaglow', stage: 4, status: { type: 'facts', phrases: ['🤳 Posted a BTS teaser to stories'] } },
+    { name: 'Sofia', handle: '@sofia.films', stage: 4, status: { type: 'facts', phrases: ['💭 Storyboarding her before/after'] } },
     { name: 'Amara', handle: '@amara.gold', stage: 3, status: { type: 'facts', phrases: ['🎬 First shoot this week'] } },
   ],
   22: [
@@ -251,7 +251,7 @@ const CREW = {
     { name: 'Jade', handle: '@jadebythesea', stage: 5, status: { type: 'heartbeat', phrases: ['🔗 Link in bio — 214 taps so far', 'Checked 6 min ago'] } },
     { name: 'Maya', handle: '@maya.skin', stage: 4, status: { type: 'facts', phrases: ['⏰ Posting Thursday', 'Draft approved ✅'] } },
     { name: 'Priya', handle: '@priyacreates', stage: 4, status: { type: 'katie', phrases: ['Katie is scheduling her post'] } },
-    { name: 'Amara', handle: '@amara.gold', stage: 3, status: { type: 'facts', phrases: ['🎬 Final edits — due Sunday'] } },
+    { name: 'Amara', handle: '@amara.gold', stage: 4, status: { type: 'facts', phrases: ['🎬 Final edits — due Sunday'] } },
   ],
   30: [
     { name: 'Nia', handle: '@niaglow', stage: 5, status: { type: 'static', phrases: ['🏆 18.9k views — your top post'] } },
@@ -299,57 +299,57 @@ const TIMELINES = {
     { when: 'Mon 9:02 am', detail: 'Matched to your brief — 94% aesthetic fit' },
     { when: 'Tue 2:15 pm', detail: 'Accepted in under 5 hours' },
     { when: 'Wed 11:30 am', detail: 'Picked SPF 50 Tinted · UPS label created' },
-    { eta: 'Saturday', detail: 'Shoot confirmed — golden hour planned' },
-    { eta: 'early next week', detail: 'Draft + link & disclosure pre-checks' },
-    { eta: 'next week', detail: 'Post goes live · we watch views hourly' },
+    { detail: 'Arriving Thursday — we’re tracking it' },
+    { detail: 'Shoot confirmed for Saturday — golden hour planned' },
+    { detail: 'Post goes live · we watch views hourly' },
   ],
   Nia: [
     { when: 'Mon 9:02 am', detail: 'Matched — her audience loves sun care' },
     { when: 'Mon 6:40 pm', detail: 'Accepted same day 🎉' },
     { when: 'Thu', detail: '“I’ve wanted to try this one forever”' },
+    { when: 'Sat', detail: 'Delivered to Brooklyn' },
     { when: 'Sun', detail: 'Filmed at the beach — two takes' },
-    { when: 'Tue 2:02 pm', detail: 'Passed link + disclosure checks' },
     { when: 'Wed 1:05 pm', detail: 'Reel live — her best post this month' },
   ],
   Sofia: [
     { when: 'Mon 9:02 am', detail: 'Matched via your “clean girl” aesthetic' },
     { when: 'Wed', detail: 'Accepted after a schedule check' },
-    { when: 'Fri', detail: 'Product delivered to Austin' },
-    { when: 'Mon', detail: 'Storyboarded her before/after' },
-    { when: 'Tue', detail: 'Draft approved first pass ✓' },
+    { when: 'Thu', detail: 'Shipped USPS priority' },
+    { when: 'Fri', detail: 'Delivered to Austin' },
+    { when: 'Mon', detail: 'Storyboarded + shot her before/after' },
     { when: 'Thu', detail: 'TikTok live — tags verified' },
   ],
   Jade: [
     { when: 'Mon 9:02 am', detail: 'Hand-picked by Katie — “the light in her work”' },
     { when: 'Tue', detail: 'Accepted + shared her moodboard' },
+    { when: 'Wed', detail: 'Shipped same day' },
     { when: 'Thu', detail: 'Delivered — she unboxed on stories' },
-    { when: 'Sat', detail: 'Golden-hour beach shoot' },
-    { when: 'Tue 3:55 pm', detail: '34s reel submitted — checks passed' },
-    { eta: 'after your approval', detail: 'Goes live + link in bio' },
+    { when: 'Sat', detail: 'Golden-hour beach shoot · 34s reel submitted' },
+    { detail: 'Goes live + link in bio after your approval' },
   ],
   Priya: [
     { when: 'Mon 9:02 am', detail: 'Matched — strong before/after format' },
     { when: 'Tue', detail: 'Accepted, confirmed her angle with Katie' },
-    { when: 'Fri', detail: 'Product delivered' },
-    { when: 'Mon', detail: 'Shot her story set' },
-    { when: 'Tue 2:02 pm', detail: 'Submitted — running pre-checks' },
-    { eta: 'this week', detail: 'Stories go live' },
+    { when: 'Thu', detail: 'Shipped' },
+    { when: 'Fri', detail: 'Delivered' },
+    { when: 'Mon', detail: 'Shot her story set · submitted Tuesday' },
+    { detail: 'Stories go live this week' },
   ],
   Amara: [
     { when: 'Wed 10:15 am', detail: 'Cast as Lena’s replacement — 96% fit' },
     { when: 'Wed 4:30 pm', detail: 'Accepted in 4 hours' },
     { when: 'Fri', detail: 'Express-shipped her product' },
-    { eta: 'this week', detail: 'First shoot scheduled' },
-    { eta: 'Sunday', detail: 'Draft due' },
-    { eta: 'next week', detail: 'Post + link tracking' },
+    { when: 'Mon', detail: 'Delivered' },
+    { detail: 'First shoot scheduled this week' },
+    { detail: 'Post + link tracking' },
   ],
   Lena: [
     { when: 'Mon 9:02 am', detail: 'Matched to your brief' },
-    { eta: 'on your approval', detail: 'Invite goes out' },
-    { eta: '—', detail: 'Product pick + shipping' },
-    { eta: '—', detail: 'Filming window' },
-    { eta: '—', detail: 'Draft + pre-checks' },
-    { eta: '—', detail: 'Post + link tracking' },
+    { detail: 'Invite goes out on your approval' },
+    { detail: 'Product pick + shipping' },
+    { detail: 'Express delivery' },
+    { detail: 'Filming window' },
+    { detail: 'Post + link tracking' },
   ],
 };
 
@@ -457,7 +457,8 @@ function LiveStatus({ status, noEmoji }) {
   useEffect(() => {
     setPi(0);
     setCount(status.counter ?? 0);
-    if (!status.phrases || status.phrases.length < 2) return undefined;
+    // quiet facts don't rotate — only genuinely live work moves
+    if (!status.phrases || status.phrases.length < 2 || status.type === 'facts') return undefined;
     const ms = status.type === 'shimmer' ? 2600 : 4200;
     const t = setInterval(() => setPi((p) => (p + 1) % status.phrases.length), ms);
     return () => clearInterval(t);
@@ -497,7 +498,7 @@ function LiveStatus({ status, noEmoji }) {
     );
   }
   if (status.type === 'facts') {
-    return <span className="cp-live"><span className="cp-live-fact cp-live-fact--gray" key={phrase}>{phrase}</span></span>;
+    return <span className="cp-live"><span className="cp-live-fact cp-live-fact--gray cp-live-fact--still">{clean(status.phrases?.[0] ?? '')}</span></span>;
   }
   return <span className="cp-live"><span className="cp-live-fact">{phrase}</span></span>;
 }
@@ -975,7 +976,7 @@ export default function CampaignPulse() {
                             <div className="cp-hist-body">
                               <div className="cp-hist-top">
                                 <span className="cp-hist-label">{c.mystery ? st.label : STAGE_LABELS[si]}</span>
-                                <span className="cp-hist-when">{state === 'done' ? (st.when || 'done') : state === 'now' ? 'right now' : (st.eta || 'up next')}</span>
+                                <span className="cp-hist-when">{state === 'done' ? (st.when || 'done') : state === 'now' ? 'right now' : ''}</span>
                               </div>
                               <div className="cp-hist-detail">{st.detail}</div>
                               {state === 'now' && <div className="cp-hist-live"><LiveStatus status={c.status} noEmoji={variant === 'V'} /></div>}
