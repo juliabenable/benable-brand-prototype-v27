@@ -446,9 +446,13 @@ function PaceFooter({ scene }) {
 }
 
 /* --- live status engine: one renderer per honesty-pattern --- */
-function LiveStatus({ status }) {
+function LiveStatus({ status, noEmoji }) {
   const [pi, setPi] = useState(0);
   const [count, setCount] = useState(status.counter ?? 0);
+  const clean = (s) =>
+    noEmoji
+      ? s.replace(/[\p{Extended_Pictographic}️‍]/gu, '').replace(/\s{2,}/g, ' ').trim()
+      : s;
 
   useEffect(() => {
     setPi(0);
@@ -465,7 +469,7 @@ function LiveStatus({ status }) {
     return () => clearInterval(t);
   }, [status]);
 
-  const phrase = status.phrases?.[pi] ?? '';
+  const phrase = clean(status.phrases?.[pi] ?? '');
 
   if (status.type === 'shimmer') {
     return (
@@ -937,7 +941,7 @@ export default function CampaignPulse() {
                         <span className="cp-crew-name">{c.handle || c.name}</span>
                         {meta && <span className="cp-crew-meta">{meta.fol} · {meta.plat}</span>}
                       </div>
-                      <div className="cp-crew-statusline"><LiveStatus status={c.status} /></div>
+                      <div className="cp-crew-statusline"><LiveStatus status={c.status} noEmoji={variant === 'V'} /></div>
                     </div>
                     {c.action && (
                       <span
@@ -974,7 +978,7 @@ export default function CampaignPulse() {
                                 <span className="cp-hist-when">{state === 'done' ? (st.when || 'done') : state === 'now' ? 'right now' : (st.eta || 'up next')}</span>
                               </div>
                               <div className="cp-hist-detail">{st.detail}</div>
-                              {state === 'now' && <div className="cp-hist-live"><LiveStatus status={c.status} /></div>}
+                              {state === 'now' && <div className="cp-hist-live"><LiveStatus status={c.status} noEmoji={variant === 'V'} /></div>}
                             </div>
                           </div>
                         );
