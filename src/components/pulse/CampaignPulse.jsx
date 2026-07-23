@@ -380,9 +380,10 @@ const VARIANTS = [
   { key: 'S', name: 'Tiles + actions' },
   { key: 'T', name: 'Gray tiles' },
   { key: 'U', name: 'Tiles + crew' },
+  { key: 'V', name: 'Gray + crew' },
 ];
 
-const CREW_VARIANTS = ['O', 'P', 'Q', 'R', 'U'];
+const CREW_VARIANTS = ['O', 'P', 'Q', 'R', 'U', 'V'];
 
 const RAIL_VARIANTS = ['E', 'F'];
 const RAIL_HOST_VARIANTS = ['E', 'F', 'H', 'I', 'J', 'M', 'N', 'S', 'T'];
@@ -902,7 +903,7 @@ export default function CampaignPulse() {
       {CREW_VARIANTS.includes(variant) && (
         <div className="cp-crew" key={`o-${scene.day}`}>
           <Lead scene={scene} />
-          <div className={variant === 'U' ? 'cp-crew-cols cp-crew-cols--left' : variant === 'Q' || variant === 'R' ? 'cp-crew-cols' : ''}>
+          <div className={variant === 'U' || variant === 'V' ? 'cp-crew-cols cp-crew-cols--left' : variant === 'Q' || variant === 'R' ? 'cp-crew-cols' : ''}>
           <div className="cp-crew-left">
           {CREW_BANNERS[scene.day] && (
             <div className={`cp-crew-banner cp-crew-banner--${CREW_BANNERS[scene.day].tone}`}>
@@ -1006,8 +1007,8 @@ export default function CampaignPulse() {
             </aside>
           )}
 
-          {(variant === 'R' || variant === 'U') && (
-            <aside className="cp-tile-stack">
+          {(variant === 'R' || variant === 'U' || variant === 'V') && (
+            <aside className={variant === 'V' ? 'cp-tile-stack cp-tile-stack--gray' : 'cp-tile-stack'}>
               <RecapTile scene={scene} />
               <UpNextTile scene={scene} />
               <PaceTile scene={scene} />
