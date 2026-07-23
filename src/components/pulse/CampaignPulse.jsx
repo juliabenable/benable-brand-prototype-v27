@@ -238,7 +238,7 @@ const CREW = {
     { mystery: true, name: 'Casting…', stage: 0, status: { type: 'shimmer', counter: 327, phrases: ['Casting her replacement…', 'Vetting 3 stand-ins…', 'Checking availability…'] } },
   ],
   16: [
-    { name: 'Jade', handle: '@jadebythesea', stage: 4, status: { type: 'katie', phrases: ['Katie is reviewing her reel — 2 of 3 in queue'] } },
+    { name: 'Jade', handle: '@jadebythesea', stage: 4, action: { cta: 'Review reel' }, status: { type: 'static', phrases: ['Her reel passed every check — waiting on your approval since 9:40 am'] } },
     { name: 'Priya', handle: '@priyacreates', stage: 4, status: { type: 'shimmer', phrases: ['Verifying your required link…', 'Checking the disclosure tag…', 'Running brand-safety checks…'] } },
     { name: 'Maya', handle: '@maya.skin', stage: 3, status: { type: 'facts', phrases: ['🎥 Filming Saturday — confirmed Tuesday'] } },
     { name: 'Nia', handle: '@niaglow', stage: 3, status: { type: 'facts', phrases: ['🤳 Posted a BTS teaser to stories'] } },
@@ -262,6 +262,93 @@ const CREW = {
     { name: 'Amara', handle: '@amara.gold', stage: 5, status: { type: 'static', phrases: ['✅ Posted — strong debut'] } },
   ],
 };
+
+const CREW_META = {
+  Maya: { fol: '64k', plat: 'Instagram' },
+  Nia: { fol: '88k', plat: 'TikTok' },
+  Sofia: { fol: '41k', plat: 'TikTok' },
+  Jade: { fol: '112k', plat: 'Instagram' },
+  Priya: { fol: '57k', plat: 'Instagram' },
+  Amara: { fol: '38k', plat: 'TikTok' },
+  Lena: { fol: '52k', plat: 'Instagram' },
+};
+
+const CREW_BANNERS = {
+  1: { tone: 'clear', text: 'Nothing needs you — we’re casting your crew right now.' },
+  3: { tone: 'amber', text: '1 thing needs you — pick your crew: 6 creators are ready for review. Everything else is handled.' },
+  9: { tone: 'clear', text: 'Nothing needs you — 2 reminders sent, 1 replacement being cast, packages on the move.' },
+  16: { tone: 'amber', text: '1 thing needs you — approve @jadebythesea’s reel. Everything else is handled: 2 reminders sent yesterday.' },
+  22: { tone: 'amber', text: '1 thing needs you — Nia’s reel is taking off, a brand comment goes a long way. Everything else is handled.' },
+  30: { tone: 'amber', text: '1 thing needs you — your wrap-up is ready to view 🥂' },
+};
+
+/* per-creator step history: done steps get `when`, future steps get `eta`;
+   the current step embeds the row's live status inside the timeline */
+const TIMELINES = {
+  Maya: [
+    { when: 'Mon 9:02 am', detail: 'Matched to your brief — 94% aesthetic fit' },
+    { when: 'Tue 2:15 pm', detail: 'Accepted in under 5 hours' },
+    { when: 'Wed 11:30 am', detail: 'Picked SPF 50 Tinted · UPS label created' },
+    { eta: 'Saturday', detail: 'Shoot confirmed — golden hour planned' },
+    { eta: 'early next week', detail: 'Draft + link & disclosure pre-checks' },
+    { eta: 'next week', detail: 'Post goes live · we watch views hourly' },
+  ],
+  Nia: [
+    { when: 'Mon 9:02 am', detail: 'Matched — her audience loves sun care' },
+    { when: 'Mon 6:40 pm', detail: 'Accepted same day 🎉' },
+    { when: 'Thu', detail: '“I’ve wanted to try this one forever”' },
+    { when: 'Sun', detail: 'Filmed at the beach — two takes' },
+    { when: 'Tue 2:02 pm', detail: 'Passed link + disclosure checks' },
+    { when: 'Wed 1:05 pm', detail: 'Reel live — her best post this month' },
+  ],
+  Sofia: [
+    { when: 'Mon 9:02 am', detail: 'Matched via your “clean girl” aesthetic' },
+    { when: 'Wed', detail: 'Accepted after a schedule check' },
+    { when: 'Fri', detail: 'Product delivered to Austin' },
+    { when: 'Mon', detail: 'Storyboarded her before/after' },
+    { when: 'Tue', detail: 'Draft approved first pass ✓' },
+    { when: 'Thu', detail: 'TikTok live — tags verified' },
+  ],
+  Jade: [
+    { when: 'Mon 9:02 am', detail: 'Hand-picked by Katie — “the light in her work”' },
+    { when: 'Tue', detail: 'Accepted + shared her moodboard' },
+    { when: 'Thu', detail: 'Delivered — she unboxed on stories' },
+    { when: 'Sat', detail: 'Golden-hour beach shoot' },
+    { when: 'Tue 3:55 pm', detail: '34s reel submitted — checks passed' },
+    { eta: 'after your approval', detail: 'Goes live + link in bio' },
+  ],
+  Priya: [
+    { when: 'Mon 9:02 am', detail: 'Matched — strong before/after format' },
+    { when: 'Tue', detail: 'Accepted, confirmed her angle with Katie' },
+    { when: 'Fri', detail: 'Product delivered' },
+    { when: 'Mon', detail: 'Shot her story set' },
+    { when: 'Tue 2:02 pm', detail: 'Submitted — running pre-checks' },
+    { eta: 'this week', detail: 'Stories go live' },
+  ],
+  Amara: [
+    { when: 'Wed 10:15 am', detail: 'Cast as Lena’s replacement — 96% fit' },
+    { when: 'Wed 4:30 pm', detail: 'Accepted in 4 hours' },
+    { when: 'Fri', detail: 'Express-shipped her product' },
+    { eta: 'this week', detail: 'First shoot scheduled' },
+    { eta: 'Sunday', detail: 'Draft due' },
+    { eta: 'next week', detail: 'Post + link tracking' },
+  ],
+  Lena: [
+    { when: 'Mon 9:02 am', detail: 'Matched to your brief' },
+    { eta: 'on your approval', detail: 'Invite goes out' },
+    { eta: '—', detail: 'Product pick + shipping' },
+    { eta: '—', detail: 'Filming window' },
+    { eta: '—', detail: 'Draft + pre-checks' },
+    { eta: '—', detail: 'Post + link tracking' },
+  ],
+};
+
+const CASTING_TIMELINE = [
+  { label: 'Brief studied', when: 'this morning', detail: 'Palette, tone and audience mapped' },
+  { label: 'Scanning', live: true, detail: 'Working through the creator graph' },
+  { label: 'Shortlisting', eta: 'next', detail: 'Top matches go to Katie for a human pass' },
+  { label: 'Your review', eta: '~2 days', detail: 'Cards land in your queue' },
+];
 
 const VARIANTS = [
   { key: 'A', name: 'Panel' },
@@ -474,6 +561,13 @@ export default function CampaignPulse() {
   );
   const [pulseOpen, setPulseOpen] = useState(persistedPulseTab);
   const [tabBarEl, setTabBarEl] = useState(null);
+  const [openCrew, setOpenCrew] = useState(() => new Set());
+  const toggleCrew = (k) =>
+    setOpenCrew((prev) => {
+      const next = new Set(prev);
+      if (next.has(k)) next.delete(k); else next.add(k);
+      return next;
+    });
   const [openDays, setOpenDays] = useState(() => new Set());
   const toggleDay = (day) =>
     setOpenDays((prev) => {
@@ -784,43 +878,85 @@ export default function CampaignPulse() {
         </div>
       )}
 
-      {/* O: the dashboard becomes a creator-per-creator live view */}
+      {/* O: the dashboard becomes a creator-per-creator live view; click a row for its history */}
       {variant === 'O' && (
         <div className="cp-crew" key={`o-${scene.day}`}>
           <Lead scene={scene} />
-          <div className="cp-section-head">
-            <h3 className="cp-section-title">Your crew</h3>
-            <p className="cp-section-sub">One line per creator — live, as it happens</p>
-          </div>
+          {CREW_BANNERS[scene.day] && (
+            <div className={`cp-crew-banner cp-crew-banner--${CREW_BANNERS[scene.day].tone}`}>
+              <span className="cp-crew-banner-dot" />
+              {CREW_BANNERS[scene.day].text}
+            </div>
+          )}
           <div className="cp-crew-card">
-            {(CREW[scene.day] || []).map((c, i) => (
-              <div className="cp-crew-row" key={`${c.name}-${i}`} style={{ animationDelay: `${0.05 * i}s` }}>
-                <div
-                  className={c.mystery ? 'cp-crew-avatar cp-crew-avatar--mystery' : 'cp-crew-avatar'}
-                  style={c.mystery ? {} : { background: HUES[c.name] }}
-                >
-                  {c.mystery ? '?' : c.name[0]}
+            {(CREW[scene.day] || []).map((c, i) => {
+              const meta = CREW_META[c.name];
+              const rowKey = `${scene.day}-${c.name}-${i}`;
+              const open = openCrew.has(rowKey);
+              const timeline = c.mystery ? CASTING_TIMELINE : TIMELINES[c.name] || [];
+              return (
+                <div key={rowKey} className={c.action ? 'cp-crew-item cp-crew-item--action' : 'cp-crew-item'}>
+                  <button type="button" className="cp-crew-row" style={{ animationDelay: `${0.05 * i}s` }} onClick={() => toggleCrew(rowKey)}>
+                    <div
+                      className={c.mystery ? 'cp-crew-avatar cp-crew-avatar--mystery' : 'cp-crew-avatar'}
+                      style={c.mystery ? {} : { background: HUES[c.name] }}
+                    >
+                      {c.mystery ? '?' : c.name[0]}
+                    </div>
+                    <div className="cp-crew-main">
+                      <div className="cp-crew-toprow">
+                        <span className="cp-crew-name">{c.handle || c.name}</span>
+                        {meta && <span className="cp-crew-meta">{meta.fol} · {meta.plat}</span>}
+                      </div>
+                      <div className="cp-crew-statusline"><LiveStatus status={c.status} /></div>
+                    </div>
+                    {c.action && (
+                      <span
+                        className="cp-action-cta"
+                        role="button"
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        {c.action.cta}
+                      </span>
+                    )}
+                    <div className="cp-crew-right">
+                      <div className="cp-bars">
+                        {STAGE_LABELS.map((s, si) => (
+                          <span key={s} title={s} className={si < c.stage ? 'cp-bar cp-bar--done' : si === c.stage ? 'cp-bar cp-bar--now' : 'cp-bar'} />
+                        ))}
+                      </div>
+                      <span className="cp-crew-stagelabel">{c.mystery ? 'Sourcing' : STAGE_LABELS[c.stage]}</span>
+                    </div>
+                    <span className={open ? 'cp-caret cp-caret--open' : 'cp-caret'}>▸</span>
+                  </button>
+
+                  {open && (
+                    <div className="cp-crew-history">
+                      {timeline.map((st, si) => {
+                        const state = c.mystery
+                          ? (st.live ? 'now' : st.when ? 'done' : 'next')
+                          : si < c.stage ? 'done' : si === c.stage ? 'now' : 'next';
+                        return (
+                          <div key={si} className={`cp-hist-step cp-hist-step--${state}`} style={{ animationDelay: `${0.05 * si}s` }}>
+                            <span className="cp-hist-dot">{state === 'done' ? '✓' : ''}</span>
+                            <div className="cp-hist-body">
+                              <div className="cp-hist-top">
+                                <span className="cp-hist-label">{c.mystery ? st.label : STAGE_LABELS[si]}</span>
+                                <span className="cp-hist-when">{state === 'done' ? (st.when || 'done') : state === 'now' ? 'right now' : (st.eta || 'up next')}</span>
+                              </div>
+                              <div className="cp-hist-detail">{st.detail}</div>
+                              {state === 'now' && <div className="cp-hist-live"><LiveStatus status={c.status} /></div>}
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  )}
                 </div>
-                <div className="cp-crew-id">
-                  <span className="cp-crew-name">{c.name}</span>
-                  {c.handle && <span className="cp-crew-handle">{c.handle}</span>}
-                </div>
-                <div className="cp-crew-dots">
-                  {STAGE_LABELS.map((s, si) => (
-                    <span
-                      key={s}
-                      title={s}
-                      className={si < c.stage ? 'cp-dot cp-dot--done' : si === c.stage ? 'cp-dot cp-dot--now' : 'cp-dot'}
-                    />
-                  ))}
-                </div>
-                <div className="cp-crew-status"><LiveStatus status={c.status} /></div>
-              </div>
-            ))}
+              );
+            })}
           </div>
-          <div className="cp-crew-legend">
-            {STAGE_LABELS.join(' · ')}
-          </div>
+          <div className="cp-crew-legend">{STAGE_LABELS.join(' · ')}</div>
         </div>
       )}
 
