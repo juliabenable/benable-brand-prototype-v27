@@ -448,7 +448,6 @@ function PaceFooter({ scene }) {
 /* --- live status engine: one renderer per honesty-pattern --- */
 function LiveStatus({ status, noEmoji }) {
   const [pi, setPi] = useState(0);
-  const [count, setCount] = useState(status.counter ?? 0);
   const clean = (s) =>
     noEmoji
       ? s.replace(/[\p{Extended_Pictographic}️‍]/gu, '').replace(/\s{2,}/g, ' ').trim()
@@ -456,17 +455,10 @@ function LiveStatus({ status, noEmoji }) {
 
   useEffect(() => {
     setPi(0);
-    setCount(status.counter ?? 0);
     // quiet facts don't rotate — only genuinely live work moves
     if (!status.phrases || status.phrases.length < 2 || status.type === 'facts') return undefined;
     const ms = status.type === 'shimmer' ? 2600 : 4200;
     const t = setInterval(() => setPi((p) => (p + 1) % status.phrases.length), ms);
-    return () => clearInterval(t);
-  }, [status]);
-
-  useEffect(() => {
-    if (status.counter == null) return undefined;
-    const t = setInterval(() => setCount((c) => c + 7 + Math.floor(Math.random() * 19)), 240);
     return () => clearInterval(t);
   }, [status]);
 
@@ -476,7 +468,6 @@ function LiveStatus({ status, noEmoji }) {
     return (
       <span className="cp-live">
         <span className="cp-live-shimmer" key={phrase}>{phrase}</span>
-        {status.counter != null && <span className="cp-live-counter">{count.toLocaleString()} scanned</span>}
       </span>
     );
   }
