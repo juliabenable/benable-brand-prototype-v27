@@ -246,20 +246,20 @@ const CREW = {
     { name: 'Amara', handle: '@amara.gold', stage: 3, status: { type: 'facts', phrases: ['🎬 First shoot this week'] } },
   ],
   22: [
-    { name: 'Nia', handle: '@niaglow', stage: 5, status: { type: 'heartbeat', phrases: ['👀 12.4k views — checked 4 min ago', '📈 +320 views in the last hour'] } },
-    { name: 'Sofia', handle: '@sofia.films', stage: 5, status: { type: 'heartbeat', phrases: ['📣 Live on TikTok — watching tags', '👀 3.1k views — checked 9 min ago'] } },
-    { name: 'Jade', handle: '@jadebythesea', stage: 5, status: { type: 'heartbeat', phrases: ['🔗 Link in bio — 214 taps so far', 'Checked 6 min ago'] } },
+    { name: 'Nia', handle: '@niaglow', stage: 5, status: { type: 'celebrate', emoji: '🎉', phrases: ['Live — 3× more first-hour views than her typical videos'] } },
+    { name: 'Sofia', handle: '@sofia.films', stage: 5, status: { type: 'celebrate', emoji: '💬', phrases: ['Live on TikTok — already getting comments'] } },
+    { name: 'Jade', handle: '@jadebythesea', stage: 5, status: { type: 'celebrate', emoji: '✨', phrases: ['Live — engagement is starting · 214 link taps'] } },
     { name: 'Maya', handle: '@maya.skin', stage: 4, status: { type: 'facts', phrases: ['⏰ Posting Thursday', 'Draft approved ✅'] } },
     { name: 'Priya', handle: '@priyacreates', stage: 4, status: { type: 'katie', phrases: ['Katie is scheduling her post'] } },
     { name: 'Amara', handle: '@amara.gold', stage: 4, status: { type: 'facts', phrases: ['🎬 Final edits — due Sunday'] } },
   ],
   30: [
-    { name: 'Nia', handle: '@niaglow', stage: 5, status: { type: 'static', phrases: ['🏆 18.9k views — your top post'] } },
-    { name: 'Jade', handle: '@jadebythesea', stage: 5, status: { type: 'static', phrases: ['💜 Fan favorite — 6.1% engagement'] } },
-    { name: 'Sofia', handle: '@sofia.films', stage: 5, status: { type: 'static', phrases: ['✅ 2 posts live'] } },
-    { name: 'Maya', handle: '@maya.skin', stage: 5, status: { type: 'static', phrases: ['✅ Posted + link shared'] } },
-    { name: 'Priya', handle: '@priyacreates', stage: 5, status: { type: 'static', phrases: ['✅ Posted + link shared'] } },
-    { name: 'Amara', handle: '@amara.gold', stage: 5, status: { type: 'static', phrases: ['✅ Posted — strong debut'] } },
+    { name: 'Nia', handle: '@niaglow', stage: 5, status: { type: 'static', phrases: ['🏆 18.9k views — your top post · thank-you sent 💌'] } },
+    { name: 'Jade', handle: '@jadebythesea', stage: 5, status: { type: 'static', phrases: ['💜 Fan favorite — 6.1% engagement · thank-you sent 💌'] } },
+    { name: 'Sofia', handle: '@sofia.films', stage: 5, status: { type: 'static', phrases: ['✅ 2 posts live · thank-you sent 💌'] } },
+    { name: 'Maya', handle: '@maya.skin', stage: 5, status: { type: 'static', phrases: ['✅ Posted + link shared · thank-you sent 💌'] } },
+    { name: 'Priya', handle: '@priyacreates', stage: 5, status: { type: 'static', phrases: ['✅ Posted + link shared · thank-you sent 💌'] } },
+    { name: 'Amara', handle: '@amara.gold', stage: 5, status: { type: 'static', phrases: ['✅ Posted — strong debut · thank-you sent 💌'] } },
   ],
 };
 
@@ -484,6 +484,15 @@ function LiveStatus({ status, noEmoji }) {
     return (
       <span className="cp-live">
         <span className="cp-live-fact cp-live-breathe">{clean(status.phrases?.[0] ?? '')}</span>
+      </span>
+    );
+  }
+  if (status.type === 'celebrate') {
+    // celebration keeps its emoji everywhere — the emoji moves, the sentence doesn't
+    return (
+      <span className="cp-live">
+        <span className="cp-celebrate-emoji">{status.emoji || '🎉'}</span>
+        <span className="cp-live-fact">{status.phrases?.[0] ?? ''}</span>
       </span>
     );
   }
