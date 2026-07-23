@@ -1221,3 +1221,36 @@
 
 .cp-katie-card .cp-katie-note { margin-top: 0; }
 .cp-katie-card .cp-katie-byline { font-size: 11.5px; color: #a08544; margin-top: 2px; }
+
+/* ---- S · inline actions on recap lines ---- */
+.cp-recap-text { flex: 1; min-width: 0; }
+
+.cp-inline-act {
+  flex: none;
+  align-self: center;
+  margin-left: 8px;
+  font-size: 11.5px;
+  font-weight: 600;
+  color: #5e41d6;
+  background: #ebe4ff;
+  border: none;
+  border-radius: 999px;
+  padding: 4px 12px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.cp-inline-act:hover { background: #ddd1ff; }
+
+/* ---- T · gray-fill tiles (the F rail treatment) ---- */
+.cp-tile-stack--gray .cp-recap-card {
+  background: #fafafa;
+  border-color: transparent;
+}
+
+.cp-tile-stack--gray .cp-recap-head { border-bottom-color: #ececec; }
+.cp-tile-stack--gray .cp-recap-closer { border-top-color: #ececec; }
+.cp-tile-stack--gray .cp-recap-closer--clear { background: #e9f4ee; }
+.cp-tile-stack--gray .cp-track { background: #ececec; }
+.cp-tile-stack--gray .cp-inline-act { background: #e4dbff; }
+.cp-tile-stack--gray .cp-upnext-item { border-color: #d9d9d9; }

@@ -66,7 +66,7 @@ const DAYS = [
     recap: {
       since: 'since Monday',
       items: [
-        { emoji: '✨', bold: '6 creators shortlisted', rest: ' — your lineup is ready' },
+        { emoji: '✨', bold: '6 creators shortlisted', rest: ' — your lineup is ready', act: 'Review' },
         { emoji: '🔬', bold: 'Engagement checks passed', rest: ' on all 6 (4.2%+)' },
         { emoji: '🧪', bold: 'Products matched', rest: ' to each creator' },
       ],
@@ -97,7 +97,7 @@ const DAYS = [
       since: 'since Friday',
       items: [
         { emoji: '✅', bold: '5 of 6 creators confirmed', rest: ' and ready to go' },
-        { emoji: '📦', bold: '4 packages shipped', rest: ' — first one already delivered' },
+        { emoji: '📦', bold: '4 packages shipped', rest: ' — first one already delivered', act: 'Track' },
         { emoji: '🔁', bold: '3 stand-ins vetted', rest: ' for Lena’s replacement' },
         { emoji: '👋', bold: '2 delivery nudges sent', rest: ' — nothing needed your input' },
       ],
@@ -128,7 +128,7 @@ const DAYS = [
     recap: {
       since: 'since Sunday',
       items: [
-        { emoji: '🎬', bold: '2 videos submitted', rest: ' — Jade’s reel is a stunner' },
+        { emoji: '🎬', bold: '2 videos submitted', rest: ' — Jade’s reel is a stunner', act: 'Watch' },
         { emoji: '📬', bold: 'All products delivered', rest: ' across the crew' },
         { emoji: '🗓', bold: '3 shoots scheduled', rest: ' for this week' },
       ],
@@ -159,7 +159,7 @@ const DAYS = [
     recap: {
       since: 'since Monday',
       items: [
-        { emoji: '📣', bold: '3 posts went live', rest: ' on IG & TikTok' },
+        { emoji: '📣', bold: '3 posts went live', rest: ' on IG & TikTok', act: 'Open' },
         { emoji: '👀', bold: '18.2k views', rest: ' and climbing' },
         { emoji: '🔗', bold: 'Links shared by all 3', rest: ' — bio + pinned comments' },
       ],
@@ -190,10 +190,10 @@ const DAYS = [
     recap: {
       since: 'since last week',
       items: [
-        { emoji: '🏆', bold: 'Top post: 18.9k views', rest: ' — Nia’s reel' },
+        { emoji: '🏆', bold: 'Top post: 18.9k views', rest: ' — Nia’s reel', act: 'View' },
         { emoji: '🔗', bold: '1,142 link taps', rest: ' across all posts' },
         { emoji: '💌', bold: 'Thank-yous sent', rest: ' to all 6 creators' },
-        { emoji: '📦', bold: '9 content files', rest: ' added to your library' },
+        { emoji: '📦', bold: '9 content files', rest: ' added to your library', act: 'Library' },
       ],
       closer: { text: 'Your wrap-up is ready', cta: 'See the wrap-up' },
     },
@@ -377,12 +377,14 @@ const VARIANTS = [
   { key: 'P', name: 'Crew photos' },
   { key: 'Q', name: 'Crew + pulse' },
   { key: 'R', name: 'Crew + tiles' },
+  { key: 'S', name: 'Tiles + actions' },
+  { key: 'T', name: 'Gray tiles' },
 ];
 
 const CREW_VARIANTS = ['O', 'P', 'Q', 'R'];
 
 const RAIL_VARIANTS = ['E', 'F'];
-const RAIL_HOST_VARIANTS = ['E', 'F', 'H', 'I', 'J', 'M', 'N'];
+const RAIL_HOST_VARIANTS = ['E', 'F', 'H', 'I', 'J', 'M', 'N', 'S', 'T'];
 const BAND_VARIANTS = ['H', 'I', 'J'];
 
 // Survive remounts (the captured-HTML subtree can wipe and re-mount the block).
@@ -495,7 +497,7 @@ function LiveStatus({ status }) {
 }
 
 /* --- harmonized tiles: identical head/body/footer anatomy --- */
-function RecapTile({ scene }) {
+function RecapTile({ scene, inlineActions }) {
   return (
     <div className="cp-recap-card">
       <div className="cp-recap-head">
@@ -507,6 +509,7 @@ function RecapTile({ scene }) {
           <div className="cp-recap-item" key={it.bold} style={{ animationDelay: `${0.07 * i}s` }}>
             <span className="cp-recap-emoji">{it.emoji}</span>
             <span className="cp-recap-text"><strong>{it.bold}</strong>{it.rest}</span>
+            {inlineActions && it.act && <button type="button" className="cp-inline-act">{it.act}</button>}
           </div>
         ))}
       </div>
@@ -641,7 +644,7 @@ export default function CampaignPulse() {
     wrap.classList.toggle('cp-rail-child', on);
     column.classList.toggle('cp-rail-host', on);
     column.classList.toggle('cp-rail-host--wide', on);
-    column.classList.toggle('cp-rail-host--left', variant === 'F' || variant === 'N' || BAND_VARIANTS.includes(variant));
+    column.classList.toggle('cp-rail-host--left', ['F', 'N', 'S', 'T'].includes(variant) || BAND_VARIANTS.includes(variant));
     column.classList.toggle('cp-rail-host--h', BAND_VARIANTS.includes(variant));
     return () => {
       wrap.classList.remove('cp-rail-child');
@@ -885,9 +888,9 @@ export default function CampaignPulse() {
         </div>
       )}
 
-      {(variant === 'M' || variant === 'N') && (
-        <div className="cp-tile-stack" key={`${variant}-${scene.day}`}>
-          <RecapTile scene={scene} />
+      {['M', 'N', 'S', 'T'].includes(variant) && (
+        <div className={variant === 'T' ? 'cp-tile-stack cp-tile-stack--gray' : 'cp-tile-stack'} key={`${variant}-${scene.day}`}>
+          <RecapTile scene={scene} inlineActions={variant === 'S' || variant === 'T'} />
           <UpNextTile scene={scene} />
           <PaceTile scene={scene} />
         </div>
