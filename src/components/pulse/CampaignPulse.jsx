@@ -455,8 +455,8 @@ function LiveStatus({ status, noEmoji }) {
 
   useEffect(() => {
     setPi(0);
-    // quiet facts don't rotate — only genuinely live work moves
-    if (!status.phrases || status.phrases.length < 2 || status.type === 'facts') return undefined;
+    // quiet facts and heartbeats don't rotate — only shimmer/katie phrases move
+    if (!status.phrases || status.phrases.length < 2 || status.type === 'facts' || status.type === 'heartbeat') return undefined;
     const ms = status.type === 'shimmer' ? 2600 : 4200;
     const t = setInterval(() => setPi((p) => (p + 1) % status.phrases.length), ms);
     return () => clearInterval(t);
@@ -483,8 +483,7 @@ function LiveStatus({ status, noEmoji }) {
   if (status.type === 'heartbeat') {
     return (
       <span className="cp-live">
-        <span className="cp-beat-dot" />
-        <span className="cp-live-fact" key={phrase}>{phrase}</span>
+        <span className="cp-live-fact cp-live-breathe">{clean(status.phrases?.[0] ?? '')}</span>
       </span>
     );
   }

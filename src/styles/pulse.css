@@ -1262,3 +1262,11 @@
 
 /* quiet facts: no entrance/rotation movement */
 .cp-live-fact--still { animation: none; }
+
+/* heartbeat: still sentence, gentle breathing — no dot, no rotation */
+.cp-live-breathe { animation: cp-breathe 3.4s ease-in-out infinite; }
+
+@keyframes cp-breathe {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.55; }
+}
