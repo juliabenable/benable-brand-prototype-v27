@@ -200,6 +200,69 @@ const DAYS = [
   },
 ];
 
+/* O · Crew live: per-creator stage + live status. Status types follow the
+   live-status study rules: shimmer = bounded machine work happening now;
+   katie = human presence, never a spinner; heartbeat = monitoring w/ recency;
+   facts = dated truths while waiting on creators; static = settled. */
+const STAGE_LABELS = ['Invited', 'Confirmed', 'Product', 'Filming', 'Submitted', 'Live'];
+
+const HUES = {
+  Maya: 'linear-gradient(135deg,#ff9d6c,#f5658c)',
+  Nia: 'linear-gradient(135deg,#7a5cfa,#b48cff)',
+  Sofia: 'linear-gradient(135deg,#2e9e6b,#7fd8a8)',
+  Jade: 'linear-gradient(135deg,#f5a041,#ffd479)',
+  Priya: 'linear-gradient(135deg,#41a7f5,#7cd6ff)',
+  Amara: 'linear-gradient(135deg,#e0589a,#ff9ec6)',
+};
+
+const CREW = {
+  1: [
+    { mystery: true, name: 'Casting…', stage: 0, status: { type: 'shimmer', counter: 1204, phrases: ['Scanning creators…', 'Checking aesthetic fit…', 'Reading engagement quality…', 'Matching to your brief…'] } },
+    { mystery: true, name: 'Casting…', stage: 0, status: { type: 'shimmer', counter: 862, phrases: ['Scanning skincare creators…', 'Filtering by audience…', 'Shortlisting…'] } },
+    { mystery: true, name: 'Casting…', stage: 0, status: { type: 'shimmer', counter: 449, phrases: ['Studying your brief…', 'Browsing look-alikes…', 'Scoring matches…'] } },
+  ],
+  3: [
+    { name: 'Maya', handle: '@maya.skin', stage: 0, status: { type: 'static', phrases: ['Ready for your review ✨'] } },
+    { name: 'Nia', handle: '@niaglow', stage: 0, status: { type: 'static', phrases: ['Ready for your review ✨'] } },
+    { name: 'Sofia', handle: '@sofia.films', stage: 0, status: { type: 'static', phrases: ['Ready for your review ✨'] } },
+    { name: 'Jade', handle: '@jadebythesea', stage: 0, status: { type: 'static', phrases: ['Ready for your review ✨'] } },
+    { name: 'Priya', handle: '@priyacreates', stage: 0, status: { type: 'static', phrases: ['Ready for your review ✨'] } },
+    { name: 'Lena', handle: '@lena.lately', stage: 0, status: { type: 'static', phrases: ['Ready for your review ✨'] } },
+  ],
+  9: [
+    { name: 'Maya', handle: '@maya.skin', stage: 2, status: { type: 'facts', phrases: ['📦 Cleared the Memphis hub', 'Arriving Thursday', 'Tracking checked 12 min ago'] } },
+    { name: 'Nia', handle: '@niaglow', stage: 2, status: { type: 'facts', phrases: ['🧴 Picked SPF 50 Tinted', 'Shipping label on its way'] } },
+    { name: 'Sofia', handle: '@sofia.films', stage: 1, status: { type: 'static', phrases: ['✅ Confirmed — shipping next'] } },
+    { name: 'Jade', handle: '@jadebythesea', stage: 2, status: { type: 'facts', phrases: ['📬 Delivered yesterday', 'Planning her shoot 💭'] } },
+    { name: 'Priya', handle: '@priyacreates', stage: 1, status: { type: 'facts', phrases: ['💭 Sketching content ideas', 'Confirmed her angle with Katie'] } },
+    { mystery: true, name: 'Casting…', stage: 0, status: { type: 'shimmer', counter: 327, phrases: ['Casting her replacement…', 'Vetting 3 stand-ins…', 'Checking availability…'] } },
+  ],
+  16: [
+    { name: 'Jade', handle: '@jadebythesea', stage: 4, status: { type: 'katie', phrases: ['Katie is reviewing her reel — 2 of 3 in queue'] } },
+    { name: 'Priya', handle: '@priyacreates', stage: 4, status: { type: 'shimmer', phrases: ['Verifying your required link…', 'Checking the disclosure tag…', 'Running brand-safety checks…'] } },
+    { name: 'Maya', handle: '@maya.skin', stage: 3, status: { type: 'facts', phrases: ['🎥 Filming Saturday — confirmed Tuesday'] } },
+    { name: 'Nia', handle: '@niaglow', stage: 3, status: { type: 'facts', phrases: ['🤳 Posted a BTS teaser to stories'] } },
+    { name: 'Sofia', handle: '@sofia.films', stage: 3, status: { type: 'facts', phrases: ['💭 Storyboarding her before/after'] } },
+    { name: 'Amara', handle: '@amara.gold', stage: 3, status: { type: 'facts', phrases: ['🎬 First shoot this week'] } },
+  ],
+  22: [
+    { name: 'Nia', handle: '@niaglow', stage: 5, status: { type: 'heartbeat', phrases: ['👀 12.4k views — checked 4 min ago', '📈 +320 views in the last hour'] } },
+    { name: 'Sofia', handle: '@sofia.films', stage: 5, status: { type: 'heartbeat', phrases: ['📣 Live on TikTok — watching tags', '👀 3.1k views — checked 9 min ago'] } },
+    { name: 'Jade', handle: '@jadebythesea', stage: 5, status: { type: 'heartbeat', phrases: ['🔗 Link in bio — 214 taps so far', 'Checked 6 min ago'] } },
+    { name: 'Maya', handle: '@maya.skin', stage: 4, status: { type: 'facts', phrases: ['⏰ Posting Thursday', 'Draft approved ✅'] } },
+    { name: 'Priya', handle: '@priyacreates', stage: 4, status: { type: 'katie', phrases: ['Katie is scheduling her post'] } },
+    { name: 'Amara', handle: '@amara.gold', stage: 3, status: { type: 'facts', phrases: ['🎬 Final edits — due Sunday'] } },
+  ],
+  30: [
+    { name: 'Nia', handle: '@niaglow', stage: 5, status: { type: 'static', phrases: ['🏆 18.9k views — your top post'] } },
+    { name: 'Jade', handle: '@jadebythesea', stage: 5, status: { type: 'static', phrases: ['💜 Fan favorite — 6.1% engagement'] } },
+    { name: 'Sofia', handle: '@sofia.films', stage: 5, status: { type: 'static', phrases: ['✅ 2 posts live'] } },
+    { name: 'Maya', handle: '@maya.skin', stage: 5, status: { type: 'static', phrases: ['✅ Posted + link shared'] } },
+    { name: 'Priya', handle: '@priyacreates', stage: 5, status: { type: 'static', phrases: ['✅ Posted + link shared'] } },
+    { name: 'Amara', handle: '@amara.gold', stage: 5, status: { type: 'static', phrases: ['✅ Posted — strong debut'] } },
+  ],
+};
+
 const VARIANTS = [
   { key: 'A', name: 'Panel' },
   { key: 'B', name: 'Banner' },
@@ -213,6 +276,7 @@ const VARIANTS = [
   { key: 'L', name: 'Tile row' },
   { key: 'M', name: 'Tiles right' },
   { key: 'N', name: 'Tiles left' },
+  { key: 'O', name: 'Crew live' },
 ];
 
 const RAIL_VARIANTS = ['E', 'F'];
@@ -273,6 +337,59 @@ function PaceFooter({ scene }) {
       </div>
     </div>
   );
+}
+
+/* --- live status engine: one renderer per honesty-pattern --- */
+function LiveStatus({ status }) {
+  const [pi, setPi] = useState(0);
+  const [count, setCount] = useState(status.counter ?? 0);
+
+  useEffect(() => {
+    setPi(0);
+    setCount(status.counter ?? 0);
+    if (!status.phrases || status.phrases.length < 2) return undefined;
+    const ms = status.type === 'shimmer' ? 2600 : 4200;
+    const t = setInterval(() => setPi((p) => (p + 1) % status.phrases.length), ms);
+    return () => clearInterval(t);
+  }, [status]);
+
+  useEffect(() => {
+    if (status.counter == null) return undefined;
+    const t = setInterval(() => setCount((c) => c + 7 + Math.floor(Math.random() * 19)), 240);
+    return () => clearInterval(t);
+  }, [status]);
+
+  const phrase = status.phrases?.[pi] ?? '';
+
+  if (status.type === 'shimmer') {
+    return (
+      <span className="cp-live">
+        <span className="cp-live-shimmer" key={phrase}>{phrase}</span>
+        {status.counter != null && <span className="cp-live-counter">{count.toLocaleString()} scanned</span>}
+      </span>
+    );
+  }
+  if (status.type === 'katie') {
+    return (
+      <span className="cp-live cp-live--katie">
+        <span className="cp-mini-katie">K<i className="cp-online" /></span>
+        <span className="cp-live-fact" key={phrase}>{phrase}</span>
+        <span className="cp-typing"><i /><i /><i /></span>
+      </span>
+    );
+  }
+  if (status.type === 'heartbeat') {
+    return (
+      <span className="cp-live">
+        <span className="cp-beat-dot" />
+        <span className="cp-live-fact" key={phrase}>{phrase}</span>
+      </span>
+    );
+  }
+  if (status.type === 'facts') {
+    return <span className="cp-live"><span className="cp-live-fact cp-live-fact--gray" key={phrase}>{phrase}</span></span>;
+  }
+  return <span className="cp-live"><span className="cp-live-fact">{phrase}</span></span>;
 }
 
 /* --- harmonized tiles: identical head/body/footer anatomy --- */
@@ -384,6 +501,15 @@ export default function CampaignPulse() {
     };
     bar?.addEventListener('click', close);
     return () => bar?.removeEventListener('click', close);
+  }, [variant]);
+
+  // O: the crew view replaces the Dashboard tab's own content
+  useEffect(() => {
+    const wrap = rootRef.current?.parentElement;
+    const column = wrap?.classList.contains('cp-host') ? wrap.parentElement : wrap;
+    if (!column) return undefined;
+    column.classList.toggle('cp-crew-mode', variant === 'O');
+    return () => column.classList.remove('cp-crew-mode');
   }, [variant]);
 
   // D: while the Pulse tab is open, hide the Dashboard tab's own content
@@ -655,6 +781,46 @@ export default function CampaignPulse() {
           <RecapTile scene={scene} />
           <UpNextTile scene={scene} />
           <PaceTile scene={scene} />
+        </div>
+      )}
+
+      {/* O: the dashboard becomes a creator-per-creator live view */}
+      {variant === 'O' && (
+        <div className="cp-crew" key={`o-${scene.day}`}>
+          <Lead scene={scene} />
+          <div className="cp-section-head">
+            <h3 className="cp-section-title">Your crew</h3>
+            <p className="cp-section-sub">One line per creator — live, as it happens</p>
+          </div>
+          <div className="cp-crew-card">
+            {(CREW[scene.day] || []).map((c, i) => (
+              <div className="cp-crew-row" key={`${c.name}-${i}`} style={{ animationDelay: `${0.05 * i}s` }}>
+                <div
+                  className={c.mystery ? 'cp-crew-avatar cp-crew-avatar--mystery' : 'cp-crew-avatar'}
+                  style={c.mystery ? {} : { background: HUES[c.name] }}
+                >
+                  {c.mystery ? '?' : c.name[0]}
+                </div>
+                <div className="cp-crew-id">
+                  <span className="cp-crew-name">{c.name}</span>
+                  {c.handle && <span className="cp-crew-handle">{c.handle}</span>}
+                </div>
+                <div className="cp-crew-dots">
+                  {STAGE_LABELS.map((s, si) => (
+                    <span
+                      key={s}
+                      title={s}
+                      className={si < c.stage ? 'cp-dot cp-dot--done' : si === c.stage ? 'cp-dot cp-dot--now' : 'cp-dot'}
+                    />
+                  ))}
+                </div>
+                <div className="cp-crew-status"><LiveStatus status={c.status} /></div>
+              </div>
+            ))}
+          </div>
+          <div className="cp-crew-legend">
+            {STAGE_LABELS.join(' · ')}
+          </div>
         </div>
       )}
 

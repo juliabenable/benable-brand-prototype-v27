@@ -814,3 +814,202 @@
 
 /* pace bars sit flush inside a tile body */
 .cp-recap-body .cp-race-meta:first-child { margin-top: 2px; }
+
+/* ============================================================
+   O · Crew live — creator-per-creator dashboard w/ live statuses
+   ============================================================ */
+
+.cp-crew-mode > *:not(.workflow-dashboard-controls):not(.cp-host) { display: none !important; }
+
+.cp-crew { margin-top: 4px; }
+
+.cp-crew-card {
+  background: #fff;
+  border: 1px solid #ececec;
+  border-radius: 14px;
+  padding: 6px 22px;
+  max-width: 980px;
+}
+
+.cp-crew-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 15px 0;
+  animation: cp-in 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.cp-crew-row:not(:last-child) { border-bottom: 1px solid #f5f5f5; }
+
+.cp-crew-avatar {
+  flex: none;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 16px;
+  font-weight: 600;
+  color: #fff;
+  border: 2px solid #fff;
+  box-shadow: 0 2px 8px #0000001f;
+}
+
+.cp-crew-avatar--mystery {
+  background: repeating-linear-gradient(45deg, #ece2d0, #ece2d0 6px, #f6efe2 6px, #f6efe2 12px);
+  color: #a9987b;
+  box-shadow: none;
+  border: 2px dashed #d8c9ab;
+}
+
+.cp-crew-id { width: 150px; flex: none; display: flex; flex-direction: column; }
+.cp-crew-name { font-size: 14px; font-weight: 600; color: #1a1a1a; }
+.cp-crew-handle { font-size: 12px; color: #9a9a9a; }
+
+.cp-crew-dots { flex: none; display: flex; gap: 5px; align-items: center; }
+
+.cp-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #ebebeb;
+}
+
+.cp-dot--done { background: #9fd8b8; }
+
+.cp-dot--now {
+  background: #7a5cfa;
+  position: relative;
+}
+
+.cp-dot--now::after {
+  content: '';
+  position: absolute;
+  inset: -3.5px;
+  border-radius: 50%;
+  border: 1.5px solid #7a5cfa;
+  opacity: 0;
+  animation: cp-ping 2.2s ease-out infinite;
+}
+
+.cp-crew-status {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  justify-content: flex-end;
+  text-align: right;
+}
+
+.cp-crew-legend {
+  max-width: 980px;
+  text-align: right;
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #b9b9b9;
+  margin-top: 8px;
+}
+
+/* ---- live status treatments ---- */
+.cp-live {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  min-height: 20px;
+}
+
+@keyframes cp-swap {
+  from { opacity: 0; transform: translateY(5px); }
+  to { opacity: 1; transform: none; }
+}
+
+/* shimmer: Claude-style gradient sweep over rotating verbs */
+.cp-live-shimmer {
+  font-weight: 500;
+  background: linear-gradient(90deg, #9a9a9a 0%, #7a5cfa 35%, #b48cff 50%, #9a9a9a 65%);
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: cp-shimmer 2s linear infinite, cp-swap 0.4s ease both;
+}
+
+@keyframes cp-shimmer {
+  from { background-position: 200% 0; }
+  to { background-position: -200% 0; }
+}
+
+.cp-live-counter {
+  font-size: 11.5px;
+  font-weight: 600;
+  color: #5e41d6;
+  background: #ebe4ff;
+  border-radius: 999px;
+  padding: 3px 9px;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+/* rotating facts & static lines */
+.cp-live-fact { color: #1a1a1a; font-weight: 500; animation: cp-swap 0.4s ease both; }
+.cp-live-fact--gray { color: #717171; font-weight: 400; }
+
+/* katie presence: a person, never a spinner */
+.cp-mini-katie {
+  flex: none;
+  position: relative;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 11px;
+  font-weight: 700;
+  color: #fff;
+  background: linear-gradient(135deg, #7a5cfa, #b48cff);
+}
+
+.cp-online {
+  position: absolute;
+  right: -1px;
+  bottom: -1px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #2e9e6b;
+  border: 1.5px solid #fff;
+}
+
+.cp-typing { display: inline-flex; gap: 3px; align-items: center; }
+
+.cp-typing i {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #b3a6e8;
+  animation: cp-type 1.2s ease-in-out infinite;
+}
+
+.cp-typing i:nth-child(2) { animation-delay: 0.15s; }
+.cp-typing i:nth-child(3) { animation-delay: 0.3s; }
+
+@keyframes cp-type {
+  0%, 60%, 100% { transform: translateY(0); opacity: 0.5; }
+  30% { transform: translateY(-3px); opacity: 1; }
+}
+
+/* heartbeat: monitoring with recency */
+.cp-beat-dot {
+  flex: none;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #2e9e6b;
+  animation: cp-beat 2.6s ease-in-out infinite;
+}
+
+@keyframes cp-beat {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(0.75); opacity: 0.55; }
+}
