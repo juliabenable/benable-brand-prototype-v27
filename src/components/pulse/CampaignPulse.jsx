@@ -375,9 +375,11 @@ const VARIANTS = [
   { key: 'N', name: 'Tiles left' },
   { key: 'O', name: 'Crew live' },
   { key: 'P', name: 'Crew photos' },
+  { key: 'Q', name: 'Crew + pulse' },
+  { key: 'R', name: 'Crew + tiles' },
 ];
 
-const CREW_VARIANTS = ['O', 'P'];
+const CREW_VARIANTS = ['O', 'P', 'Q', 'R'];
 
 const RAIL_VARIANTS = ['E', 'F'];
 const RAIL_HOST_VARIANTS = ['E', 'F', 'H', 'I', 'J', 'M', 'N'];
@@ -896,6 +898,8 @@ export default function CampaignPulse() {
       {CREW_VARIANTS.includes(variant) && (
         <div className="cp-crew" key={`o-${scene.day}`}>
           <Lead scene={scene} />
+          <div className={variant === 'Q' || variant === 'R' ? 'cp-crew-cols' : ''}>
+          <div className="cp-crew-left">
           {CREW_BANNERS[scene.day] && (
             <div className={`cp-crew-banner cp-crew-banner--${CREW_BANNERS[scene.day].tone}`}>
               <span className="cp-crew-banner-dot" />
@@ -911,7 +915,7 @@ export default function CampaignPulse() {
               return (
                 <div key={rowKey} className={c.action ? 'cp-crew-item cp-crew-item--action' : 'cp-crew-item'}>
                   <button type="button" className="cp-crew-row" style={{ animationDelay: `${0.05 * i}s` }} onClick={() => toggleCrew(rowKey)}>
-                    {variant === 'P' && !c.mystery && PHOTOS[c.name] ? (
+                    {variant !== 'O' && !c.mystery && PHOTOS[c.name] ? (
                       <div className="cp-crew-avatar cp-crew-avatar--photo">
                         <img src={PHOTOS[c.name]} alt={c.name} />
                       </div>
@@ -977,6 +981,35 @@ export default function CampaignPulse() {
             })}
           </div>
           <div className="cp-crew-legend">{STAGE_LABELS.join(' · ')}</div>
+          </div>
+
+          {variant === 'Q' && (
+            <aside className="cp-tile-stack">
+              <div className="cp-recap-card">
+                <div className="cp-recap-head">
+                  <span className="cp-recap-title">📡 Today at Benable</span>
+                  <span className="cp-recap-since">updated live</span>
+                </div>
+                <div className="cp-recap-body"><Feed scene={scene} compact thumbs /></div>
+              </div>
+              <div className="cp-katie-card">
+                <div className="cp-katie">K</div>
+                <div>
+                  <div className="cp-katie-note">“{scene.katie}”</div>
+                  <div className="cp-katie-byline">Katie · your campaign manager</div>
+                </div>
+              </div>
+            </aside>
+          )}
+
+          {variant === 'R' && (
+            <aside className="cp-tile-stack">
+              <RecapTile scene={scene} />
+              <UpNextTile scene={scene} />
+              <PaceTile scene={scene} />
+            </aside>
+          )}
+          </div>
         </div>
       )}
 

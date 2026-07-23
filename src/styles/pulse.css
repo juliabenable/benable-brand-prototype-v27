@@ -1191,3 +1191,33 @@
   border-radius: 50%;
   display: block;
 }
+
+/* ---- Q/R · crew + right rail ---- */
+.cp-crew-cols {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 344px;
+  gap: 24px;
+  align-items: start;
+}
+
+@media (max-width: 1100px) {
+  .cp-crew-cols { grid-template-columns: 1fr; }
+}
+
+.cp-crew-left { min-width: 0; }
+.cp-crew-cols .cp-crew-card { max-width: none; }
+.cp-crew-cols .cp-crew-legend { max-width: none; }
+
+.cp-katie-card {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  background: linear-gradient(180deg, #faf7f1 0%, #fbf9f5 100%);
+  border: 1px solid #f0e7d8;
+  border-radius: 14px;
+  padding: 16px 18px;
+  animation: cp-in 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.cp-katie-card .cp-katie-note { margin-top: 0; }
+.cp-katie-card .cp-katie-byline { font-size: 11.5px; color: #a08544; margin-top: 2px; }
